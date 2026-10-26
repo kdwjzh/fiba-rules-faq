@@ -1,0 +1,20 @@
+# 金鑰（只 commit .env.example）
+.env
+.env.*
+!.env.example
+
+# Python / uv
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# 由 build_index 產生，可重建
+data/index.npz
+
+# 編輯器 / 系統
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
