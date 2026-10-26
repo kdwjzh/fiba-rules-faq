@@ -12,7 +12,9 @@
 - `.env.example` 參考課程 Lab 5 的版本改寫：新增 `EMBED_MODEL`；註明雲端模型只讀 `{PROFILE}_MODEL`（對應 Lab 5 雲端 fallback 到 `LLM_MODEL` 造成 404 的問題）
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 自己在 GitHub 建立 repo `fiba-rules-faq`，並確認為 Public
+- Claude Code 第一次 push 時認證失敗（Git Credential Manager 存的帳密無效），我改用瀏覽器登入 GitHub 授權後才推送成功
+- 檢查 `.gitignore` 有排除 `.env`，確認金鑰不會被 commit
 
 **驗證方式**
 - `git status` 確認 `.env` 不會被追蹤；`git ls-remote` 確認遠端原本是空的
@@ -28,7 +30,9 @@
 - 寫 workflow 前用 `git ls-remote --tags` 查各 action 目前的主版本：`actions/checkout@v7`、`configure-pages@v6`、`upload-pages-artifact@v5`、`deploy-pages@v5`（課程範例或網路教學常見的舊版號沒有照抄）
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 到 Settings → Pages 把 Source 設為 GitHub Actions；第一次設定時 repo 還是空的，設定沒有存下來，之後用 kdwjzh 帳號重新設定，並重新整理頁面確認
+- 在 Actions 手動按 Run workflow 重新部署，確認 Deploy Pages 綠燈
+- 打開 https://kdwjzh.github.io/fiba-rules-faq/ 確認作品頁四個區塊都有出現
 
 **驗證方式**
 - 在瀏覽器以手機寬度（375px）預覽作品頁，確認不會橫向捲動
