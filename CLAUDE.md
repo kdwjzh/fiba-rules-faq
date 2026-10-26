@@ -186,4 +186,5 @@ Claude Code 每完成一個里程碑，把以下內容追加到 `docs/ai-usage-l
 | 日期 | 里程碑 | 狀態 | 備註 |
 |---|---|---|---|
 | 2026-10-26 | — | 交接說明建立 | 尚未建立 GitHub repo |
-| 2026-10-26 | M0 | 完成 | git init、remote 設好；`.gitignore`／`.gitattributes`／`.env.example`／`docs/ai-usage-log.md` 已 commit 並 push。待 Jimmy 確認 repo 為 Public |
+| 2026-10-26 | M0 | 完成 | git init、remote 設好；`.gitignore`／`.gitattributes`／`.env.example`／`docs/ai-usage-log.md` 已 commit。repo 已確認 Public；第一次 push 實際未成功，M1 時一起 push |
+| 2026-10-26 | M1 | 檔案完成，待部署確認 | `site/index.html` 四區塊空殼＋`pages.yml`（checkout@v7、configure-pages@v6、upload-pages-artifact@v5、deploy-pages@v5）。待 Jimmy push、Settings → Pages 選 GitHub Actions、確認綠燈與網址 |
