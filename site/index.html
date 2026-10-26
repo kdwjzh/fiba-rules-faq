@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIBA 規則 FAQ 查詢</title>
+  <meta name="description" content="用 embedding 從自建題庫查詢 FIBA 2026 籃球規則的小專案">
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --fg: #1f2328;
+      --muted: #59636e;
+      --card: #ffffff;
+      --border: #d8dee4;
+      --accent: #c2410c;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #16181c;
+        --fg: #e6e8eb;
+        --muted: #9aa4af;
+        --card: #1f2227;
+        --border: #343a42;
+        --accent: #fb923c;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      line-height: 1.7;
+    }
+    header, main, footer { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    header { padding-top: 40px; padding-bottom: 8px; }
+    h1 { font-size: 1.8rem; margin: 0 0 4px; }
+    header p { margin: 0; color: var(--muted); }
+    nav { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 16px; }
+    nav a { color: var(--accent); text-decoration: none; font-size: .95rem; }
+    nav a:hover { text-decoration: underline; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px 20px 16px;
+      margin: 20px 0;
+    }
+    h2 { font-size: 1.25rem; border-left: 4px solid var(--accent); padding-left: 10px; }
+    .todo { color: var(--muted); font-style: italic; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+    th, td { border-bottom: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top; }
+    th { white-space: nowrap; }
+    code, pre { font-family: ui-monospace, Consolas, monospace; font-size: .9em; }
+    pre { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; overflow-x: auto; }
+    a { color: var(--accent); }
+    footer { color: var(--muted); font-size: .85rem; padding-top: 8px; padding-bottom: 40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FIBA 規則 FAQ 查詢</h1>
+    <p>輸入口語問題，用 embedding 從自建題庫找出最相關的 FIBA 2026 規則問答。</p>
+    <nav>
+      <a href="#what">做了什麼</a>
+      <a href="#how">怎麼執行</a>
+      <a href="#results">執行結果</a>
+      <a href="#ai">AI 使用說明</a>
+      <a href="#refs">參考資料</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="what">
+      <h2>做了什麼</h2>
+      <p class="todo">（M7 補上：功能說明、流程圖、使用到的模型能力）</p>
+    </section>
+
+    <section id="how">
+      <h2>怎麼執行</h2>
+      <p class="todo">（M7 補上：安裝 uv、啟動 Ollama、建索引、查詢的指令）</p>
+    </section>
+
+    <section id="results">
+      <h2>執行結果</h2>
+      <div id="results-body">
+        <p class="todo">（M6 產生 <code>data/results.json</code> 後，這裡會自動顯示 Hit@1、Hit@3 與拒答正確率）</p>
+      </div>
+    </section>
+
+    <section id="ai">
+      <h2>AI 使用說明</h2>
+      <p class="todo">（M7 補上：用了什麼工具｜用在哪裡｜我自己修改或驗證了什麼）</p>
+    </section>
+
+    <section id="refs">
+      <h2>參考資料</h2>
+      <ul>
+        <li><a href="https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2026-v1-1.pdf">FIBA Official Basketball Rules 2026（v1.1）</a></li>
+        <li><a href="https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2026-rule-changes-v10a.pdf">FIBA 2026 規則修改摘要</a></li>
+        <li><a href="https://github.com/kdwjzh/fiba-rules-faq">本專案 GitHub repo</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    規則以 FIBA 官方規則書為準，本工具僅供學習查詢。題庫答案為作者自行整理，非規則書原文。
+  </footer>
+
+  <script>
+    // results.json 由本機執行 report 產生後 commit；檔案不存在時保留預設文字
+    fetch("data/results.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data || !data.metrics) return;
+        const rows = Object.entries(data.metrics)
+          .map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`)
+          .join("");
+        document.getElementById("results-body").innerHTML =
+          `<div class="table-wrap"><table>${rows}</table></div>`;
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>
