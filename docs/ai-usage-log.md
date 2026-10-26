@@ -33,4 +33,5 @@
 **驗證方式**
 - 在瀏覽器以手機寬度（375px）預覽作品頁，確認不會橫向捲動
 - 發現 M0 的 push 其實沒有成功（GitHub API 顯示 repo 沒有任何分支），M1 時一併重新 push
-- 推送後確認 Actions 的 Deploy Pages 綠燈、Pages 網址打得開（待 Jimmy 設定 Settings → Pages 後確認）
+- 第一次部署失敗：`configure-pages` 回報 `Get Pages site failed ... Not Found`。原因是 repo 還是空的時候就去 Settings → Pages 選 GitHub Actions，設定沒有存下來（GitHub API 顯示 `has_pages: false`）
+- Jimmy 用 kdwjzh 帳號重新設定 Source、手動 Run workflow 後，Deploy Pages 綠燈；`curl` 確認 https://kdwjzh.github.io/fiba-rules-faq/ 回傳 200，頁面有五個區塊標題
