@@ -21,6 +21,8 @@
   {"query": "球沒進但打到框，我們自己搶回來了，秒數怎麼算", "expected": ["shot-clock-reset-rebound"]},
   {"query": "教練一直罵裁判會被請出去嗎", "expected": ["head-coach-disqualification"]},
   {"query": "打球的時候不小心球碰到腳", "expected": ["kicking-ball"]},
+  {"query": "請告訴我什麼是走步", "expected": ["travelling"]},
+  {"query": "請告訴我什麼是進攻犯規", "expected": ["offensive-foul"]},
   {"query": "NBA 球員的薪水上限是多少", "expected": []},
   {"query": "籃球鞋要怎麼挑比較不會扭到", "expected": []},
   {"query": "排球一局打到幾分", "expected": []}
