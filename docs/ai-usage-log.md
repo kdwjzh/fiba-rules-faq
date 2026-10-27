@@ -76,6 +76,8 @@
 
 **Jimmy 修改或否決了什麼**
 - Claude Code 找不到 Docker 和 Ollama，我選擇自己安裝 Docker Desktop，沒有改用 Windows 版 Ollama，照原本的課程環境做，M6 的 Dockerfile 也需要 Docker
+- 自己下載安裝 WSL 2 和 Docker Desktop，再請 Claude Code 檢查 WSL 2 狀態（預設版本 2，docker-desktop 執行中）
+- 對照 FIBA 2026 v1.1 規則書核對 10 題答案與條號後，把 status 全部改成 verified
 
 **驗證方式**
 - `uv run ruff check .`：All checks passed；`uv run pytest -q`：32 passed
