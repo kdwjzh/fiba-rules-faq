@@ -53,7 +53,7 @@
 - `.github/workflows/ci.yml`：`checkout@v7` → `astral-sh/setup-uv@v7`（Python 3.12）→ `uv sync --locked --dev` → ruff → pytest
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- Claude Code 發現電腦上沒有 uv，我選擇讓它用 winget 安裝（另一個選項是自己手動裝）
 
 **驗證方式**
 - 本機 `uv run ruff check .`：All checks passed；`uv run pytest -q`：9 passed
