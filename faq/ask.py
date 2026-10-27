@@ -2,7 +2,7 @@
 import sys
 
 from faq import store
-from faq.build_index import embed
+from faq.build_index import embed_query
 
 
 def search(query: str, k: int = 3) -> list[tuple[dict, float]]:
@@ -13,7 +13,7 @@ def search(query: str, k: int = 3) -> list[tuple[dict, float]]:
     vectors, ids, saved_hash = store.load_index()
     if saved_hash != store.faq_hash(list(items.values())):
         print("⚠ 題庫已變更，索引是舊的，請重新執行 faq.build_index", file=sys.stderr)
-    hits = store.top_k(embed([query])[0], vectors, k=k)
+    hits = store.top_k(embed_query(query), vectors, k=k)
     return [(items[ids[i]], score) for i, score in hits if ids[i] in items]
 
 
