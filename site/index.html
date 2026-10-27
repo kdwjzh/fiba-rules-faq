@@ -13,6 +13,9 @@
       --card: #ffffff;
       --border: #d8dee4;
       --accent: #c2410c;
+      --ok: #15803d;
+      --bad: #b91c1c;
+      --chip: #f3f4f6;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -22,6 +25,9 @@
         --card: #1f2227;
         --border: #343a42;
         --accent: #fb923c;
+        --ok: #4ade80;
+        --bad: #f87171;
+        --chip: #2a2e35;
       }
     }
     * { box-sizing: border-box; }
@@ -32,7 +38,7 @@
       font-family: system-ui, -apple-system, "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
       line-height: 1.7;
     }
-    header, main, footer { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    header, main, footer { max-width: 860px; margin: 0 auto; padding: 0 16px; }
     header { padding-top: 40px; padding-bottom: 8px; }
     h1 { font-size: 1.8rem; margin: 0 0 4px; }
     header p { margin: 0; color: var(--muted); }
@@ -46,22 +52,36 @@
       padding: 4px 20px 16px;
       margin: 20px 0;
     }
-    h2 { font-size: 1.25rem; border-left: 4px solid var(--accent); padding-left: 10px; }
-    .todo { color: var(--muted); font-style: italic; }
+    h2 { font-size: 1.3rem; border-left: 4px solid var(--accent); padding-left: 10px; }
+    h3 { font-size: 1.05rem; margin: 20px 0 6px; }
+    .muted { color: var(--muted); font-size: .9rem; }
     .table-wrap { overflow-x: auto; }
-    table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+    table { border-collapse: collapse; width: 100%; font-size: .92rem; }
     th, td { border-bottom: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top; }
     th { white-space: nowrap; }
-    code, pre { font-family: ui-monospace, Consolas, monospace; font-size: .9em; }
+    td.num { white-space: nowrap; }
+    #queries td:first-child, #answers td:first-child { min-width: 9em; }
+    #answers td:nth-child(2) { min-width: 15em; }
+    code, pre { font-family: ui-monospace, Consolas, monospace; font-size: .88em; }
+    code { background: var(--chip); padding: 1px 4px; border-radius: 4px; }
     pre { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; overflow-x: auto; }
+    pre code { background: none; padding: 0; }
     a { color: var(--accent); }
+    .flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 12px 0; padding: 0; list-style: none; }
+    .flow li { background: var(--chip); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: .9rem; }
+    .flow li.arrow { background: none; border: none; padding: 0; color: var(--muted); }
+    .ok { color: var(--ok); font-weight: 600; }
+    .bad { color: var(--bad); font-weight: 600; }
+    img { max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 6px; }
+    details { margin: 8px 0; }
+    summary { cursor: pointer; color: var(--accent); }
     footer { color: var(--muted); font-size: .85rem; padding-top: 8px; padding-bottom: 40px; }
   </style>
 </head>
 <body>
   <header>
     <h1>FIBA 規則 FAQ 查詢</h1>
-    <p>輸入口語問題，用 embedding 從自建題庫找出最相關的 FIBA 2026 規則問答。</p>
+    <p>輸入口語問題，用 embedding 從自建題庫找出最相關的 FIBA 2026 規則問答，再用結構化輸出產生附出處的回答。</p>
     <nav>
       <a href="#what">做了什麼</a>
       <a href="#how">怎麼執行</a>
@@ -74,31 +94,152 @@
   <main>
     <section id="what">
       <h2>做了什麼</h2>
-      <p class="todo">（M7 補上：功能說明、流程圖、使用到的模型能力）</p>
+      <p>
+        看籃球比賽常會想問「拿球跑三步會被吹嗎」「快攻從後面拉人怎麼判」，但規則書是英文、條文很長，
+        而且 2026 年 FIBA 改了不少規則（例如取消 unsportsmanlike foul）。這個專案自建 45 題 FIBA 2026 規則問答，
+        讓使用者用口語提問，程式找出最相關的題目並附上條號。
+      </p>
+      <ul class="flow">
+        <li>口語問題</li><li class="arrow">→</li>
+        <li>embedding<br><span class="muted">qwen3-embedding:0.6b</span></li><li class="arrow">→</li>
+        <li>cosine 相似度取 top-3</li><li class="arrow">→</li>
+        <li>低於門檻 0.50 → 拒答</li><li class="arrow">→</li>
+        <li>結構化回答<br><span class="muted">qwen3:1.7b ＋ Pydantic</span></li><li class="arrow">→</li>
+        <li>guard 檢查出處</li>
+      </ul>
+      <h3>用到的模型能力</h3>
+      <ul>
+        <li><strong>Embedding</strong>：把題庫（問題＋別名＋答案）和使用者問題轉成向量，用 cosine 相似度找最接近的 3 題；最高分低於門檻就回「題庫沒有相關規則」。</li>
+        <li><strong>結構化輸出</strong>：把 top-3 交給 <code>qwen3:1.7b</code>，用 <code>chat.completions.parse</code> 搭配 Pydantic，輸出 <code>answer</code>、<code>source_ids</code>、<code>confidence</code> 三個欄位。</li>
+        <li><strong>程式端 guard</strong>：出處只能是 top-3 的 id、回答不超過 100 字、不能只寫 id、信心「低」改成拒答；沒通過就改顯示人工審核過的題庫答案。</li>
+      </ul>
+      <h3>題庫</h3>
+      <p>
+        45 題，全部對照 FIBA 2026 v1.1 規則書核對過（<code>status: verified</code>），答案用自己的話寫、每題附條號。
+        分類：違例 14、比賽基本 8、犯規 8、罰則 7、2026 新制 5、比賽管理 3。
+      </p>
+      <h3>技術</h3>
+      <p class="muted">Python 3.12（uv）· 本地 Ollama（Docker）· OpenAI 相容 API · numpy · Pydantic · pytest／ruff · GitHub Actions（CI ＋ Pages）· Dockerfile／compose</p>
     </section>
 
     <section id="how">
       <h2>怎麼執行</h2>
-      <p class="todo">（M7 補上：安裝 uv、啟動 Ollama、建索引、查詢的指令）</p>
+      <p class="muted">以下是 Windows PowerShell 指令；需要先裝 <a href="https://docs.astral.sh/uv/">uv</a>、Git、Docker Desktop。</p>
+      <h3>1. 下載專案、安裝套件</h3>
+<pre><code>git clone https://github.com/kdwjzh/fiba-rules-faq.git
+cd fiba-rules-faq
+uv sync
+Copy-Item .env.example .env</code></pre>
+      <h3>2. 啟動 Ollama、下載模型</h3>
+<pre><code>docker volume create ollama
+docker compose up -d ollama
+docker compose exec ollama ollama pull qwen3-embedding:0.6b
+docker compose exec ollama ollama pull qwen3:1.7b</code></pre>
+      <h3>3. 建索引、查詢</h3>
+<pre><code>uv run python -m faq.build_index
+uv run python -m faq.ask "拿球走三步會怎樣"
+uv run python -m faq.answer "請告訴我什麼是進攻犯規"</code></pre>
+      <p><code>faq.ask</code> 只做檢索（列出 top-3 與分數）；<code>faq.answer</code> 再用模型產生結構化回答，每題約 10–25 秒。</p>
+      <h3>4. 產生這頁的執行結果、跑測試</h3>
+<pre><code>uv run python -m faq.report --answers
+uv run ruff check .
+uv run pytest -q</code></pre>
+      <h3>也可以全部在容器裡跑</h3>
+<pre><code>docker compose run --rm app faq.build_index
+docker compose run --rm app faq.answer "快攻從後面拉人會怎麼判"</code></pre>
+      <p class="muted">Dockerfile 是 multi-stage，執行階段以非 root 使用者執行；測試不呼叫模型，CI 每次 push 都會跑 ruff 和 pytest。</p>
     </section>
 
     <section id="results">
       <h2>執行結果</h2>
-      <div id="results-body">
-        <p class="todo">（M6 產生 <code>data/results.json</code> 後，這裡會自動顯示 Hit@1、Hit@3 與拒答正確率）</p>
-      </div>
+      <p class="muted" id="results-meta">讀取 data/results.json 中…</p>
+      <h3>整體指標</h3>
+      <div class="table-wrap" id="metrics"></div>
+      <p class="muted">
+        Hit@1：第 1 名就是期望的題目；Hit@3：期望題目在前 3 名內。題庫外查詢（例如「NBA 球員薪水上限」）用來測拒答門檻。
+      </p>
+
+      <h3>相似度熱圖</h3>
+      <p class="muted">每一列是一條測試查詢，每一欄是題庫的一題，越紅越相似；藍框是期望答案。</p>
+      <a href="similarity.png"><img src="similarity.png" alt="測試查詢與題庫的 cosine 相似度熱圖" loading="lazy"></a>
+
+      <h3>每條測試查詢的檢索結果</h3>
+      <div class="table-wrap" id="queries"></div>
+
+      <h3>模型回答範例</h3>
+      <div id="answers"></div>
+
+      <h3>已知限制</h3>
+      <ul>
+        <li>題庫外的問題如果用到籃球字眼（「排球一局打到幾分」），相似度可能過門檻，模型也照答。門檻再拉高會誤拒題庫內的口語問題。</li>
+        <li><code>qwen3:1.7b</code> 對口語問法的理解有限：會引用錯的題目、把撞人和阻擋講反；guard 只能擋格式（出處、字數），擋不住內容錯誤。</li>
+        <li>保留模型的思考模式，每題約 10–25 秒；關掉後只要 1–2 秒，但引用正確率較低，還會加入題庫以外的內容。</li>
+        <li>同樣的設定每次跑，模型回答會有些微差異。</li>
+      </ul>
     </section>
 
     <section id="ai">
       <h2>AI 使用說明</h2>
-      <p class="todo">（M7 補上：用了什麼工具｜用在哪裡｜我自己修改或驗證了什麼）</p>
+      <p>
+        開發時使用 <strong>Claude Code</strong>（Anthropic，模型 Claude Opus 5.5）輔助。
+        題庫答案由 Claude Code 讀規則書後起草，<strong>一律先標 draft，由我對照 FIBA 規則書 PDF 核對後才改成 verified</strong>。
+        完整紀錄在 <a href="https://github.com/kdwjzh/fiba-rules-faq/blob/main/docs/ai-usage-log.md">docs/ai-usage-log.md</a>。
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用了什麼工具</th><th>用在哪裡</th><th>我自己修改或驗證了什麼</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Claude Code</td>
+              <td>建 repo、<code>.gitignore</code>、GitHub Actions（CI、Pages 部署）</td>
+              <td>自己建立 Public repo；第一次 push 認證失敗，改用瀏覽器登入 GitHub 授權；Pages 第一次部署失敗是因為 repo 還空著時設定沒存到，重新設定 Source 並手動 Run workflow 後確認綠燈；檢查 <code>.gitignore</code> 有排除 <code>.env</code></td>
+            </tr>
+            <tr>
+              <td>Claude Code</td>
+              <td>環境（uv、Docker、Ollama）</td>
+              <td>電腦上沒有 uv，選擇讓它用 winget 安裝；沒有 Docker 時，選擇自己安裝 WSL 2 和 Docker Desktop，照課程環境做，不改用 Windows 版 Ollama</td>
+            </tr>
+            <tr>
+              <td>Claude Code</td>
+              <td>起草題庫 45 題（讀規則書、整理條號、用自己的話寫答案）</td>
+              <td>對照 FIBA 2026 v1.1 規則書逐題核對答案與條號後才改成 verified；同意重播那題出處寫成 Appendix F；核對時確認 throw-in-foul 原本漏了「最後 2 分鐘」條件，這題我第一次審核時也沒發現</td>
+            </tr>
+            <tr>
+              <td>Claude Code</td>
+              <td>程式：<code>store</code>、<code>llm</code>（改自課程 Lab 5）、<code>build_index</code>、<code>ask</code>、<code>answer</code>、<code>report</code>、測試</td>
+              <td>同意拒答改由檢索門檻決定、保留思考模式（較慢但較準）；自己用 <code>faq.answer</code> 試問，發現「什麼是走步」沒有解釋名詞、「什麼是進攻犯規」完全答錯，回報後請它補定義句、新增進攻犯規題目、去掉回答開頭的 id，修正後重跑都答對</td>
+            </tr>
+            <tr>
+              <td>Claude Code</td>
+              <td>評估報告、熱圖、Dockerfile／compose</td>
+              <td>決定不做本地 vs 雲端比較表，加分項改靠 Dockerfile／compose 和 CI 跑 pytest</td>
+            </tr>
+            <tr>
+              <td>Ollama：qwen3-embedding:0.6b、qwen3:1.7b</td>
+              <td>程式本身用到的模型（embedding、結構化回答）</td>
+              <td>用 27 條自己設計的口語測試查詢評估（上方「執行結果」），依結果調整門檻與 prompt</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>AI 或舊資料寫錯、被抓出來的地方</h3>
+      <ul>
+        <li><strong>throw-in foul</strong>：AI 起草時寫成「發界外球時的犯規只罰 1 球」，漏掉 Art. 34.1.2 的條件（只限第四節和延長賽最後 2 分鐘）。</li>
+        <li><strong>無衝撞區半徑</strong>：AI 起草時寫成 1.25 公尺，規則書 Art. 2.5.7 是 1.30 公尺。</li>
+        <li><strong>技術犯規罰球人選</strong>：AI 起草時寫「任何隊員都可以罰」，Art. 44.2.2 是由對方總教練指定。</li>
+        <li><strong>條號</strong>：舊資料常說五次犯規是 Art. 40，2026 版是 Art. 41（Art. 40 變成 Fighting）。</li>
+        <li><strong>犯規名稱</strong>：2026 版已取消 unsportsmanlike foul，改成 disruptive foul 和 flagrant foul；題庫測試會檢查答案不能把舊名稱當成現行規則。</li>
+        <li><strong>模型輸出</strong>：<code>qwen3:1.7b</code> 曾把 prompt 裡的 <code>id: travelling</code> 整段抄進出處、把整段 FAQ 原文貼進回答，都被 guard 擋下，之後改了 prompt 格式並加上字數檢查。</li>
+      </ul>
     </section>
 
     <section id="refs">
       <h2>參考資料</h2>
       <ul>
-        <li><a href="https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2026-v1-1.pdf">FIBA Official Basketball Rules 2026（v1.1）</a></li>
+        <li><a href="https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2026-v1-1.pdf">FIBA Official Basketball Rules 2026（v1.1，2026-10-01 生效）</a></li>
         <li><a href="https://assets.fiba.basketball/image/upload/documents-corporate-fiba-official-rules-2026-rule-changes-v10a.pdf">FIBA 2026 規則修改摘要</a></li>
+        <li><a href="https://huggingface.co/Qwen/Qwen3-Embedding-0.6B">Qwen3-Embedding</a>（查詢加任務說明的做法）</li>
+        <li>課程「設計機器學習平台與系統架構」第 4–7 週講義與 Lab 4、Lab 5 範例程式</li>
         <li><a href="https://github.com/kdwjzh/fiba-rules-faq">本專案 GitHub repo</a></li>
       </ul>
     </section>
@@ -109,18 +250,82 @@
   </footer>
 
   <script>
-    // results.json 由本機執行 report 產生後 commit；檔案不存在時保留預設文字
+    // results.json 由本機執行 faq.report 產生後 commit；讀不到時保留預設文字
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const REFUSAL = "題庫沒有相關規則";
+
+    function renderMetrics(data) {
+      const rows = Object.entries(data.metrics)
+        .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("");
+      document.getElementById("metrics").innerHTML = `<table>${rows}</table>`;
+      const t = new Date(data.generated_at).toLocaleString("zh-TW", { hour12: false });
+      document.getElementById("results-meta").textContent =
+        `產生時間 ${t}｜embedding：${data.models.embedding}｜回答：${data.models.answer}｜題庫 ${data.faq_count} 題`;
+    }
+
+    function renderQueries(data) {
+      const th = data.counts.threshold;
+      const rows = data.queries.map((q) => {
+        const exp = q.expected.length ? q.expected.join("、") : "（題庫外）";
+        const top = q.top.map(([id, s], i) => {
+          const mark = q.expected.includes(id) ? ` class="ok"` : "";
+          return `<span${mark}>${i + 1}. ${esc(id)} ${s.toFixed(3)}</span>`;
+        }).join("<br>");
+        let verdict;
+        if (!q.expected.length) verdict = q.top[0][1] < th ? `<span class="ok">拒答 ✓</span>` : `<span class="bad">沒擋到</span>`;
+        else if (q.expected.includes(q.top[0][0])) verdict = `<span class="ok">Hit@1</span>`;
+        else if (q.top.some(([id]) => q.expected.includes(id))) verdict = "Hit@3";
+        else verdict = `<span class="bad">沒找到</span>`;
+        return `<tr><td>${esc(q.query)}</td><td>${esc(exp)}</td><td class="num">${top}</td><td class="num">${verdict}</td></tr>`;
+      }).join("");
+      document.getElementById("queries").innerHTML =
+        `<table><thead><tr><th>查詢</th><th>期望</th><th>檢索 top-3（分數）</th><th>結果</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function answerRow(a) {
+      let body, verdict;
+      if (a.guard) {
+        body = `<span class="muted">（模型回答沒通過 guard：${esc(a.guard)}，改顯示題庫答案）</span>`;
+        verdict = "guard 擋下";
+      } else if (a.answer === REFUSAL) {
+        body = esc(a.answer);
+        verdict = a.expected.length ? `<span class="bad">誤拒</span>` : `<span class="ok">拒答 ✓</span>`;
+      } else {
+        body = `${esc(a.answer)}<br><span class="muted">出處：${esc(a.source_ids.join("、"))}｜信心：${esc(a.confidence)}</span>`;
+        const ok = a.expected.length && a.source_ids.some((i) => a.expected.includes(i));
+        verdict = ok ? `<span class="ok">出處正確</span>` : `<span class="bad">${a.expected.length ? "出處不對" : "沒擋到"}</span>`;
+      }
+      return `<tr><td>${esc(a.query)}</td><td>${body}</td><td class="num">${verdict}<br><span class="muted">${a.seconds} 秒</span></td></tr>`;
+    }
+
+    function renderAnswers(data) {
+      const el = document.getElementById("answers");
+      if (!data.answers || !data.answers.length) {
+        el.innerHTML = `<p class="muted">這次沒有用 --answers 產生模型回答。</p>`;
+        return;
+      }
+      // 先挑幾個代表性的例子，其餘收在 details 裡
+      const pick = ["請告訴我什麼是進攻犯規", "被包夾在自己半場一直帶不過去", "對手站在一公尺內貼著我，我要多快出手",
+                    "NBA 球員的薪水上限是多少", "中鋒一直站在籃下等球可以嗎", "排球一局打到幾分"];
+      const head = `<thead><tr><th>查詢</th><th>模型回答</th><th>結果</th></tr></thead>`;
+      const shown = pick.map((q) => data.answers.find((a) => a.query === q)).filter(Boolean);
+      el.innerHTML =
+        `<div class="table-wrap"><table>${head}<tbody>${shown.map(answerRow).join("")}</tbody></table></div>` +
+        `<details><summary>看全部 ${data.answers.length} 條的模型回答</summary>` +
+        `<div class="table-wrap"><table>${head}<tbody>${data.answers.map(answerRow).join("")}</tbody></table></div></details>`;
+    }
+
     fetch("data/results.json")
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        if (!data || !data.metrics) return;
-        const rows = Object.entries(data.metrics)
-          .map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`)
-          .join("");
-        document.getElementById("results-body").innerHTML =
-          `<div class="table-wrap"><table>${rows}</table></div>`;
+        if (!data) throw new Error("no data");
+        renderMetrics(data);
+        renderQueries(data);
+        renderAnswers(data);
       })
-      .catch(() => {});
+      .catch(() => {
+        document.getElementById("results-meta").textContent = "讀不到 data/results.json（請在本機執行 faq.report 產生）。";
+      });
   </script>
 </body>
 </html>
