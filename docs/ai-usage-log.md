@@ -206,3 +206,21 @@
 
 **Jimmy 修改或否決了什麼**
 - 確認作品頁、README 與 AI 使用說明表格的內容都是我實際做過的事
+
+## M8 繳交前檢查（2026-10-27）
+
+**工具**：Claude Code（Claude Opus 5.5）
+
+**Claude Code 做了什麼**
+- 照 CLAUDE.md 第 7 節逐項檢查並打勾，更新 AGENTS.md 的專案結構（拿掉沒做的 `compare.py`，補上 Dockerfile／compose、AI 使用紀錄）
+
+**驗證方式**
+- GitHub API：repo `visibility: public`、`has_pages: true`；作品頁回 200
+- `git ls-files`：有 `uv.lock`，沒有 `.env`、`.venv`、`data/index.npz`
+- `git log -p --all` 搜 `sk-|AIza|sk-ant`：只有 `.env.example` 的 `sk-...` 佔位文字和檢查清單本身；改用金鑰長度的嚴格比對（如 `sk-` 後面 16 字以上）查無結果
+- `uv sync --locked --dev`、`uv run ruff check .`、`uv run pytest -q`（119 passed）；CI 與 Deploy Pages 最新一次都是 success
+- README 與作品頁裡的外部連結都回 200
+- 從 GitHub 重新 clone 到暫存資料夾，`uv sync --locked --dev` 後 pytest 通過，確認沒有依賴本機才有的檔案
+
+**Jimmy 修改或否決了什麼**
+- （待填）

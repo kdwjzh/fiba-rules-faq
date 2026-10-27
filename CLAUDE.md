@@ -168,15 +168,15 @@ Claude Code 每完成一個里程碑，把以下內容追加到 `docs/ai-usage-l
 ---
 
 ## 7. 繳交前檢查清單
-- [ ] repo 是 Public；README 有功能與執行步驟
-- [ ] `git log --oneline` ≥ 5 個 commit（GitHub 自動產生的 Initial commit 不算進去比較保險）
-- [ ] `uv.lock` 已 commit；`git status` 看不到 `.env`、`.venv`
-- [ ] **整個歷史沒有金鑰**：`git log -p | Select-String "sk-|AIza|sk-ant"` 查無結果
-- [ ] ruff、pytest 通過；`ci.yml`、`pages.yml` 最新一次都是綠燈
-- [ ] Settings → Pages 的 Source 是 GitHub Actions；網址打得開
-- [ ] 作品頁四項：做了什麼／怎麼執行／執行結果／AI 使用說明，加上參考資料
-- [ ] 題庫答案都是自己的話、都有 2026 條號、`verified` ≥ 40
-- [ ] 加分：Dockerfile、CI 跑 pytest、比較表（有做的打勾）
+- [x] repo 是 Public；README 有功能與執行步驟
+- [x] `git log --oneline` ≥ 5 個 commit（GitHub 自動產生的 Initial commit 不算進去比較保險）
+- [x] `uv.lock` 已 commit；`git status` 看不到 `.env`、`.venv`
+- [x] **整個歷史沒有金鑰**：`git log -p | Select-String "sk-|AIza|sk-ant"` 查無結果
+- [x] ruff、pytest 通過；`ci.yml`、`pages.yml` 最新一次都是綠燈
+- [x] Settings → Pages 的 Source 是 GitHub Actions；網址打得開
+- [x] 作品頁四項：做了什麼／怎麼執行／執行結果／AI 使用說明，加上參考資料
+- [x] 題庫答案都是自己的話、都有 2026 條號、`verified` ≥ 40
+- [x] 加分：Dockerfile ✓、CI 跑 pytest ✓、比較表 ✗（Jimmy 決定不做）
 - [ ] iLearn 填了 repo 網址＋Pages 網址，時間在 11/08 23:59 前
 
 ---
@@ -194,4 +194,5 @@ Claude Code 每完成一個里程碑，把以下內容追加到 `docs/ai-usage-l
 | 2026-10-27 | M5 | 完成 | `answer.py`：門檻拒答＋qwen3:1.7b 結構化回答＋guard（id ⊆ top-3、≤100 字、不可只有 id、低信心拒答），沒通過改顯示題庫答案。最後一輪：題庫外 3/3 拒答，模型回答採用 13/22（引用正確 10）。思考模式只能用 `reasoning_effort="none"` 關，但品質較差所以保留 |
 | 2026-10-27 | M5 補充 | 完成 | 依 Jimmy 試跑：travelling 補定義句、新增 offensive-foul、修正 throw-in-foul（漏 Art. 34.1.2 最後 2 分鐘條件），這 3 題為 draft；回答去掉 id 前綴；測試查詢 27 條，Hit@1 17/24、Hit@3 22/24 |
 | 2026-10-27 | M6 | 完成 | `report.py`＋`site/data/results.json`＋`site/similarity.png`：Hit@1 17/24、Hit@3 22/24、誤拒 0、題庫外拒答 2/3；模型回答採用 19（出處正確 17）、guard 擋 5。Dockerfile（multi-stage、非 root）＋compose 測過。比較表 Jimmy 決定不做。注意：Ollama 現在由 compose 啟動（`docker compose up -d ollama`），原本手動的 `ollama` 容器已停止 |
-| 2026-10-27 | M7 | 完成（待 Jimmy 看過） | 作品頁四區塊＋參考資料（結果由 results.json 動態產生、熱圖、回答範例、已知限制、AI 使用說明表格與 AI 寫錯清單）；README 完成。手機 375px 檢查過 |
+| 2026-10-27 | M7 | 完成（Jimmy 已看過） | 作品頁四區塊＋參考資料（結果由 results.json 動態產生、熱圖、回答範例、已知限制、AI 使用說明表格與 AI 寫錯清單）；README 完成。手機 375px 檢查過 |
+| 2026-10-27 | M8 | 檢查完成，待 Jimmy 繳交 | 第 7 節除了 iLearn 繳交都已打勾：Public、59+ commit、uv.lock、歷史無真實金鑰（只有 `.env.example` 的 `sk-...` 佔位與清單文字）、ruff＋pytest 119 passed、CI／Pages 綠燈、Pages 由 Actions 部署、45 題全 verified、連結都 200；從 GitHub 重新 clone 後 `uv sync --locked` ＋ pytest 通過。AGENTS.md 拿掉不存在的 compare.py |
