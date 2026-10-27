@@ -223,4 +223,4 @@
 - 從 GitHub 重新 clone 到暫存資料夾，`uv sync --locked --dev` 後 pytest 通過，確認沒有依賴本機才有的檔案
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 在 iLearn 繳交 repo 網址與作品頁網址
