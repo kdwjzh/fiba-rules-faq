@@ -59,3 +59,24 @@
 - 本機 `uv run ruff check .`：All checks passed；`uv run pytest -q`：9 passed
 - 設定 `LLM_MODEL=qwen3:0.6b` 後呼叫 `get_llm('openai')`，模型仍是 `gpt-6-luna`，確認 Lab 5 的 404 問題已修（沒有連網路）
 - 已知待辦：`PRICES` 沿用 Lab 5 價目表，沒有 `.env.example` 裡的 `gemini-3.8-flash`；M6 做 compare 前要依實際使用的雲端模型補上價格
+
+## M3 10 題跑通（2026-10-27，進行中）
+
+**工具**：Claude Code（Claude Opus 5.5）
+
+**Claude Code 做了什麼**
+- 從 FIBA 官網下載 2026 v1.1 規則書，用 pypdf 轉成文字（只放在暫存資料夾，沒有進 repo），核對目錄條號後起草 10 題 `data/faq.json`，全部是 `draft`：走步 Art. 25、二次運球 Art. 24、3 秒 Art. 26、8 秒 Art. 28、24 秒 Art. 29、回場 Art. 30、干擾球 Art. 31、五犯 Art. 41、團隊犯規 Art. 42、disruptive foul Art. 37
+- `data/test_queries.json`：12 條口語查詢（10 條對應題庫、2 條題庫沒有）
+- `faq/build_index.py`（呼叫本地 embedding，存 vectors＋ids＋題庫 hash）、`faq/ask.py`（top-3＋門檻拒答，題庫改過會提醒重建索引；草稿答案會標「尚未人工核對」）、`store.load_index`
+- `tests/test_faq_data.py`：題庫欄位、category、條號格式、id 不重複、測試查詢的 id 都存在；答案若提到 unsportsmanlike 必須同時說明已取消
+
+**條號核對時發現的差異**
+- 2026 版 Art. 37 是 disruptive foul、Art. 38 flagrant foul、Art. 39 disqualifying foul、Art. 40 fighting；**五次犯規在 Art. 41**，不是交接說明裡 2024 版對照的 Art. 40
+- Art. 25 走步、26 三秒、28 八秒、29 進攻計時與 2024 版相同
+
+**Jimmy 修改或否決了什麼**
+- （待填）
+
+**驗證方式**
+- `uv run ruff check .`：All checks passed；`uv run pytest -q`：32 passed
+- 電腦上沒有 Docker／Ollama／WSL，`build_index` 與 `ask` 還沒用真的模型跑過；Jimmy 選擇自己安裝 Docker Desktop
