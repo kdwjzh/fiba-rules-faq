@@ -33,7 +33,7 @@ class GuardError(ValueError):
 def strip_id_prefix(text: str, ids: list[str]) -> str:
     """拿掉開頭的「team-fouls：」這類 id 前綴（Jimmy 試跑時發現）。"""
     for i in ids:
-        m = re.match(rf"\s*{re.escape(i)}\s*(?:（[^）]*）)?\s*[:：]\s*", text, flags=re.IGNORECASE)
+        m = re.match(rf"\s*{re.escape(i)}[ \t]*(?:（[^）]*）)?[ \t]*(?:[:：]|\n)\s*", text, flags=re.IGNORECASE)
         if m:
             return text[m.end():]
     return text

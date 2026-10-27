@@ -45,6 +45,10 @@ def test_id_prefix_stripped():
     assert guard(ans, ["team-fouls", "shot-clock", "travelling"]).answer == "進攻方犯規仍由對方發球。"
     ans2 = RuleAnswer(answer="Overtime（FIBA OBR 2026 Art. 8）：延長賽每次 5 分鐘。", source_ids=["overtime"], confidence="高")
     assert guard(ans2, ["overtime"]).answer == "延長賽每次 5 分鐘。"
+    ans3 = RuleAnswer(answer="shot-clock\n\n重設為 14 秒。", source_ids=["shot-clock"], confidence="高")
+    assert guard(ans3, ["shot-clock"]).answer == "重設為 14 秒。"
+    ans4 = RuleAnswer(answer="shot-clock 規則規定 24 秒內要出手。", source_ids=["shot-clock"], confidence="高")
+    assert guard(ans4, ["shot-clock"]).answer == ans4.answer  # 句中提到 id 不動
 
 
 def test_answer_mentioning_id_with_content_passes():
