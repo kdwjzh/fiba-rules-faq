@@ -192,3 +192,4 @@ Claude Code 每完成一個里程碑，把以下內容追加到 `docs/ai-usage-l
 | 2026-10-27 | M3 | 完成 | 10 題（Jimmy 已改 verified；條號對照 2026 v1.1，五犯是 Art. 41）、12 條測試查詢、`build_index`、`ask`、`test_faq_data.py`。Ollama 跑在 Docker；查詢加 Qwen3 instruction 後 Hit@1 7/10、Hit@3 10/10，門檻改 0.45 |
 | 2026-10-27 | M4 | 完成 | 題庫 44 題全部 verified（Jimmy 審核）、測試查詢 25 條；Hit@1 16/22、Hit@3 20/22；門檻改 0.50（誤拒 1/22、題庫外拒答 2/3） |
 | 2026-10-27 | M5 | 完成 | `answer.py`：門檻拒答＋qwen3:1.7b 結構化回答＋guard（id ⊆ top-3、≤100 字、不可只有 id、低信心拒答），沒通過改顯示題庫答案。最後一輪：題庫外 3/3 拒答，模型回答採用 13/22（引用正確 10）。思考模式只能用 `reasoning_effort="none"` 關，但品質較差所以保留 |
+| 2026-10-27 | M5 補充 | 待審核 | 依 Jimmy 試跑：travelling 補定義句、新增 offensive-foul、修正 throw-in-foul（漏 Art. 34.1.2 最後 2 分鐘條件），這 3 題為 draft；回答去掉 id 前綴；測試查詢 27 條，Hit@1 17/24、Hit@3 22/24 |
