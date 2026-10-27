@@ -188,4 +188,4 @@
 - `grep -r "sk-|AIza|sk-ant" site/`：沒有金鑰
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 決定不做本地 vs 雲端比較表；加分項改靠 Dockerfile／compose 和 CI 跑 pytest
