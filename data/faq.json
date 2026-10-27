@@ -106,7 +106,7 @@
     "answer": "FIBA 比賽分 4 節，每節 10 分鐘。第一、二節之間和第三、四節之間休息 2 分鐘，中場休息 15 分鐘。開賽前 20 分鐘就算進入比賽的休息時間。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 8",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "overtime",
@@ -115,7 +115,7 @@
     "answer": "第四節結束時比分相同，就打延長賽，每次 5 分鐘，打到分出勝負為止，延長賽開始前休息 2 分鐘。延長賽每隊只有 1 次暫停，團隊犯規也接著第四節繼續累計。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 8",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "goal-value",
@@ -124,7 +124,7 @@
     "answer": "看出手位置：罰球進算 1 分，從兩分區出手進算 2 分，從三分區出手進算 3 分。球必須從籃框上方進入並留在籃內或穿過籃網才算進球；從下方把球穿過籃框是違例。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 16",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "own-basket",
@@ -133,7 +133,7 @@
     "answer": "不小心把球弄進自己的籃框，對方得 2 分，記錄在對方場上隊長名下。如果是故意投進自己籃框，屬於違例，這球不算分。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 16",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "team-size",
@@ -142,7 +142,7 @@
     "answer": "比賽進行時每隊場上有 5 名球員。賽前登錄在記錄表上的隊員才有資格上場，每隊最多 12 名（包括隊長）。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 4",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "court-size",
@@ -151,7 +151,7 @@
     "answer": "標準 FIBA 球場長 28 公尺、寬 15 公尺。三分線的弧頂從籃框正下方的地面量起，半徑是 6.75 公尺。2026 版放寬了場地線條的顏色，但兩個半場同類標線的顏色要一致。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 2",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "jump-ball-alternating",
@@ -160,7 +160,7 @@
     "answer": "只有第一節開賽在中圈跳球。之後遇到雙方爭球、裁判無法判定誰讓球出界、球卡在籃框和籃板之間等跳球情況，以及第二節以後每節開始，都改用輪替球權，由箭頭指向的隊伍發界外球。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 12",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "forfeit",
@@ -169,7 +169,7 @@
     "answer": "預定開賽 15 分鐘後還湊不齊 5 名球員、阻礙比賽進行，或被主裁判要求後仍拒絕比賽，就以棄權判負，比分記 20:0。比賽中場上能打的球員少於 2 人，則因缺員判負：領先的一方保留當時比分，否則記 2:0。",
     "category": "比賽基本",
     "source": "FIBA OBR 2026 Art. 20",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "act-of-shooting",
@@ -178,7 +178,7 @@
     "answer": "2026 版把投籃動作分成兩種：跳投或其他移動中的投籃，從肩膀和球開始往籃框方向抬起時算起；切入上籃則從運球結束或空中接球、球停在手中並繼續投籃動作時算起。原則上要在前場才算投籃動作，節末或 24 秒快結束前的最後一擊例外。跟走了幾步沒有關係；被犯規後把球傳出去，就不算投籃動作。",
     "category": "2026 新制",
     "source": "FIBA OBR 2026 Art. 15",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "technical-foul-categories",
@@ -187,7 +187,7 @@
     "answer": "2026 版把技術犯規分成兩類。第 1 類是態度問題，例如對裁判不尊重、挑釁對手、在對手眼前揮手、假摔，會累計成取消比賽資格；第 2 類是拖延比賽、吊框這類行政性的違規，不累計。球員 2 次第 1 類技術犯規，或 2 次 flagrant foul，或各 1 次，就取消比賽資格。",
     "category": "2026 新制",
     "source": "FIBA OBR 2026 Art. 36",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "flagrant-foul",
@@ -196,7 +196,7 @@
     "answer": "flagrant foul 是比 disruptive foul 更嚴重的接觸：不是正當的籃球動作、魯莽危險可能讓人受傷，或為了搶球用力過猛。罰則和 disruptive foul 一樣是罰球加前場發球，也算團隊犯規；差別是 flagrant foul 會累計成取消資格，2 次就要離場。",
     "category": "2026 新制",
     "source": "FIBA OBR 2026 Art. 38",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "instant-replay",
@@ -205,7 +205,7 @@
     "answer": "有重播系統時，裁判在任何時間都可以看進球是兩分還是三分、該罰 2 球還是 3 球、犯規等級要不要升降。節末可以看出手是否在時間到之前；第四節和延長賽最後 2 分鐘還能看更多，例如干擾球判得對不對。2026 版新增：任何時間都能檢查犯規後有沒有干擾球，最後 2 分鐘也能看發球員的球出手了沒。",
     "category": "2026 新制",
     "source": "FIBA OBR 2026 Appendix F",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "out-of-bounds",
@@ -214,7 +214,7 @@
     "answer": "球員身體任何部位碰到界線或界外的地面就算出界；球碰到界外的人、地面、籃板背面或支架也算出界，線本身也算界外。最後碰到球的球員就是讓球出界的人，由對方發界外球。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 23",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "closely-guarded",
@@ -223,7 +223,7 @@
     "answer": "持球的球員如果被對手在 1 公尺以內積極、合法地防守，就要在 5 秒內傳球、投籃或開始運球，否則就是違例。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 27",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "throw-in",
@@ -232,7 +232,7 @@
     "answer": "發球員拿到裁判交給的球後，要在 5 秒內把球傳出去，否則就是違例，改由對方發球。發球時不能踩進場內，也不能直接把球投進籃框。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 17",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "free-throw-rules",
@@ -241,7 +241,7 @@
     "answer": "罰球員要在裁判給球後 5 秒內出手，球碰到籃框前不能踩到罰球線或進入限制區。站在罰球卡位區的球員要等球離開罰球員的手才能進禁區，其他球員要待在罰球線延長線和三分線後方。罰球員違例，進了也不算。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 44",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "kicking-ball",
@@ -250,7 +250,7 @@
     "answer": "籃球只能用手打。故意用腳踢球、用腿擋球，或用拳頭打球，都是違例，由對方在最近的地點發界外球。如果只是不小心讓球碰到腳或腿，不算違例。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 13",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "shot-clock-reset-rebound",
@@ -259,7 +259,7 @@
     "answer": "球碰到籃框後，如果由對方搶到，進攻時間重設為 24 秒；如果是原本進攻的球隊搶回，就重設為 14 秒。球沒有碰到籃框就不會重設。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 29",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "basket-interference",
@@ -268,7 +268,7 @@
     "answer": "投籃後球還碰著籃框時，球員不能去碰籃框或籃板，否則是干擾籃框違例。防守方違例時直接判給進攻方該球的分數；進攻方違例則不得分，由對方在罰球線延長線發球。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 31",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "cylinder",
@@ -277,7 +277,7 @@
     "answer": "每個球員在場上都佔有一個假想的圓柱體空間，大小大約由手掌、臀部、手臂和腿的外緣圍成，上方的空間也算在內。防守者不能進入持球者的圓柱體造成接觸；持球者也不能把手腳張到圓柱體外撞人來搶空間。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 33",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "charging-blocking",
@@ -286,7 +286,7 @@
     "answer": "撞人（charging）是推或撞進對手的軀幹，常見於進攻球員往前衝撞已經站好位置的防守者。阻擋（blocking）是不合法地妨礙對手前進，例如防守者在對方已經起跳或沒有站穩時才移進他的路線。誰先佔到合法防守位置，是判斷的重點。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 33",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "no-charge-semicircle",
@@ -295,7 +295,7 @@
     "answer": "籃框下方有一個半徑 1.30 公尺的無衝撞半圓區。切入時，進攻球員在空中持球投籃或傳球，撞到腳踩在半圓區內的防守者，不能吹進攻犯規，除非進攻者不當使用手、腳或身體。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 33",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "double-foul",
@@ -304,7 +304,7 @@
     "answer": "兩名對手幾乎同時對彼此犯規、而且都有身體接觸，就是雙方犯規，兩人各記一次犯規，都不罰球。比賽依當時的狀況恢復，例如原本控球的一方繼續發球；同時有進球的話，由失分的一方在底線發球。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 35",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "fake-foul",
@@ -313,7 +313,7 @@
     "answer": "故意假裝被犯規，或用誇張的動作讓裁判以為被犯規，都屬於假摔。2026 版把假摔列為第 1 類技術犯規，會累計成取消比賽資格，對方獲得 1 次罰球。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 36",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "disqualifying-foul",
@@ -322,7 +322,7 @@
     "answer": "嚴重違反運動精神的行為，例如對對手或裁判動粗，會被判取消資格犯規。被判的人要立刻回休息室待到比賽結束，或離開場館。接觸性的犯規由被犯規者罰球，非接觸性的則由教練指定一名球員罰 2 球，之後在前場發球。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 39",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "fighting",
@@ -331,7 +331,7 @@
     "answer": "打架或可能演變成打架時，替補球員、已犯滿離場的球員和隨隊人員只要離開板凳區，就會被取消資格。只有總教練和第一助理教練可以離開板凳區去協助裁判恢復秩序，不會因此被取消資格。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 40",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "shooting-foul",
@@ -340,7 +340,7 @@
     "answer": "投籃時被犯規，球有進就算分再加罰 1 球；沒進的話，兩分球出手罰 2 球，三分球出手罰 3 球。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 34",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "throw-in-foul",
@@ -349,7 +349,7 @@
     "answer": "發界外球時發生的犯規，不管防守方是否已經進入團隊犯規罰則，被犯規的球員都只罰 1 球，之後由原本的球隊在最近的地點繼續發球。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 34",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "technical-foul-penalty",
@@ -358,7 +358,7 @@
     "answer": "對方立刻罰 1 球，由對方總教練指定一名隊員罰。罰完後，由吹判時控球或擁有球權的隊伍，在比賽停止處附近發球繼續比賽。球員的技術犯規不管是哪一類，都算個人犯規和團隊犯規。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 36",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "head-coach-disqualification",
@@ -367,7 +367,7 @@
     "answer": "總教練本人行為不當被吹 2 次第 1 類技術犯規，就會被取消比賽資格。如果是板凳上其他人造成的，合計 3 次也會讓總教練離場。總教練離場後由第一助理教練接手，沒有登記助理教練的話由隊長代理。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 41",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "free-throw-shooter",
@@ -376,7 +376,7 @@
     "answer": "一般犯規、disruptive、flagrant 和接觸性的取消資格犯規，要由被犯規的球員自己罰。技術犯規和非接觸性的取消資格犯規，則由對方總教練指定一名隊員罰。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 44",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "timeouts",
@@ -385,7 +385,7 @@
     "answer": "每次暫停 1 分鐘。上半場每隊 2 次，下半場 3 次，但第四節最後 2 分鐘內最多只能用 2 次；每個延長賽 1 次。沒用完的暫停不能留到下半場或延長賽。第四節和延長賽最後 2 分鐘，剛投進球的一方不能叫暫停，除非裁判停止了比賽。",
     "category": "比賽管理",
     "source": "FIBA OBR 2026 Art. 18",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "substitution",
@@ -394,7 +394,7 @@
     "answer": "要等換人時機：死球而且比賽計時器停止時、最後一次罰球進球後，雙方都可以換人。第四節和延長賽最後 2 分鐘，對方投進球後，失分的一方也可以換人。發球員拿到球或罰球員拿到第一次罰球的球時，換人時機就結束。",
     "category": "比賽管理",
     "source": "FIBA OBR 2026 Art. 19",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "last-two-minutes-throw-in",
@@ -403,6 +403,6 @@
     "answer": "第四節或延長賽最後 2 分鐘內，原本要在後場發球的隊伍叫暫停後，總教練可以選擇改在前場的發球線發球，或維持在後場最接近比賽停止處發球。",
     "category": "比賽管理",
     "source": "FIBA OBR 2026 Art. 17",
-    "status": "draft"
+    "status": "verified"
   }
 ]
