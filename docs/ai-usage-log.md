@@ -135,7 +135,7 @@
 - guard 擋不住語意錯誤：例如「切入被撞倒」的回答把撞人與阻擋講反、「球碰到腳」內容對但出處引用 goaltending。小模型的生成品質有限，作品頁的主要結果還是以檢索（M3／M4 的 Hit@1、Hit@3）為主
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 同意 Claude Code 把拒答改由檢索門檻決定、保留思考模式（較慢但較準）的做法
 
 **驗證方式**
 - `uv run ruff check .`：All checks passed；`uv run pytest -q`：112 passed
