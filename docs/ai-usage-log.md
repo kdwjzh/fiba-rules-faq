@@ -104,10 +104,38 @@
 - 2026 版假摔（fake being fouled）屬於**第 1 類技術犯規**，會累計成取消資格；舊資料常只說是警告或一般技術犯規
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 對照 FIBA 2026 v1.1 規則書逐題核對 Claude Code 起草的 34 題新題目與條號，確認後把 status 改成 verified（題庫 44 題全部 verified）
+- 同意重播（IRS）那題的出處寫成「FIBA OBR 2026 Appendix F」，因為規則書把它放在附錄、沒有條號
 
 **驗證方式**
 - `uv run ruff check .`：All checks passed；`uv run pytest -q`：100 passed
 - 重建 44 題索引（約 16 秒），25 條查詢：Hit@1 16/22、Hit@3 20/22
 - 題庫變大後，題庫外查詢的分數也變高（「排球一局打到幾分」0.561、「籃球鞋怎麼挑」0.491），題庫內第 1 名最低 0.473，兩邊重疊；比較 0.40–0.50 後把門檻改為 0.50（誤拒 1/22、題庫外拒答 2/3），剩下的留給 M5 由模型判斷
 - 「中鋒一直站在籃下」（3 秒）和「灌籃後掛在籃框上」（技術犯規）連前 3 名都沒有
+
+## M5 加強版：結構化回答＋guard（2026-10-27）
+
+**工具**：Claude Code（Claude Opus 5.5）
+
+**Claude Code 做了什麼**
+- `faq/answer.py`：檢索 top-3 → 低於門檻直接拒答 → `qwen3:1.7b` 用 `chat.completions.parse` + Pydantic `RuleAnswer`（answer／source_ids／confidence）產生回答 → `guard` 檢查 → 沒通過就改顯示檢索第 1 名的題庫答案（人工審核過的文字）
+- `guard` 規則：source_ids 必須是 top-3 的子集；有回答就要附出處；不超過 100 字；不能只寫 id；confidence「低」改成拒答
+- `tests/test_answer_guard.py`：10 個測試，只測檢查函式，不呼叫模型
+- `pydantic` 改成直接相依（原本只是 openai 間接裝進來）
+
+**試跑時發現的問題與修正**（25 條測試查詢，每輪約 5 分鐘）
+1. 第一版 prompt 的 id 標成 `[id: travelling]`，模型把 `id: travelling` 整段抄進 source_ids，guard 擋下 → 改格式並列出可用 id
+2. 讓模型自己決定拒答時，題庫內 22 條有 9–12 條被誤拒（模型推理過程顯示它沒把「被包夾帶不過半場」連到 8 秒規則）→ 改成拒答交給檢索門檻，模型只挑條目，信心「低」才拒答
+3. 比較思考模式：`/no_think`、`think=false` 都沒效，只有 `reasoning_effort="none"` 能關（14 秒 → 1–2 秒）；但關掉後引用正確率較低（14 vs 16／22），還出現 FAQ 以外的知識（回答「排球一局打到 25 分」），所以保留思考模式
+4. 模型有時把整段 FAQ 原文貼進 answer、或 answer 只寫 id → guard 加上 100 字上限與「只有 id」檢查
+
+**最後一輪結果（本機 qwen3:1.7b，同一設定每次跑結果會略有不同）**
+- 題庫外 3 條：全部拒答（2 條被門檻擋、「排球」由模型低信心擋下）
+- 題庫內 22 條：模型回答被採用 13 條，其中引用正確 10 條；guard 擋下 8 條改顯示題庫答案；門檻誤拒 1 條
+- guard 擋不住語意錯誤：例如「切入被撞倒」的回答把撞人與阻擋講反、「球碰到腳」內容對但出處引用 goaltending。小模型的生成品質有限，作品頁的主要結果還是以檢索（M3／M4 的 Hit@1、Hit@3）為主
+
+**Jimmy 修改或否決了什麼**
+- （待填）
+
+**驗證方式**
+- `uv run ruff check .`：All checks passed；`uv run pytest -q`：112 passed
