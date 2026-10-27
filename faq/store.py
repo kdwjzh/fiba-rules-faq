@@ -9,7 +9,8 @@ ROOT = Path(__file__).resolve().parent.parent
 FAQ_PATH = ROOT / "data" / "faq.json"
 INDEX_PATH = ROOT / "data" / "index.npz"
 
-THRESHOLD = 0.5  # 最高分低於這個值就拒答；之後用 test_queries.json 調整
+# 最高分低於這個值就拒答。M3 的 12 條測試查詢：題庫內第 1 名最低 0.473、題庫外最高 0.416
+THRESHOLD = 0.45
 
 
 def load_faq(path: Path = FAQ_PATH) -> list[dict]:
