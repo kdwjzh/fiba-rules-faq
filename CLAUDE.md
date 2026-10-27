@@ -194,3 +194,4 @@ Claude Code 每完成一個里程碑，把以下內容追加到 `docs/ai-usage-l
 | 2026-10-27 | M5 | 完成 | `answer.py`：門檻拒答＋qwen3:1.7b 結構化回答＋guard（id ⊆ top-3、≤100 字、不可只有 id、低信心拒答），沒通過改顯示題庫答案。最後一輪：題庫外 3/3 拒答，模型回答採用 13/22（引用正確 10）。思考模式只能用 `reasoning_effort="none"` 關，但品質較差所以保留 |
 | 2026-10-27 | M5 補充 | 完成 | 依 Jimmy 試跑：travelling 補定義句、新增 offensive-foul、修正 throw-in-foul（漏 Art. 34.1.2 最後 2 分鐘條件），這 3 題為 draft；回答去掉 id 前綴；測試查詢 27 條，Hit@1 17/24、Hit@3 22/24 |
 | 2026-10-27 | M6 | 完成 | `report.py`＋`site/data/results.json`＋`site/similarity.png`：Hit@1 17/24、Hit@3 22/24、誤拒 0、題庫外拒答 2/3；模型回答採用 19（出處正確 17）、guard 擋 5。Dockerfile（multi-stage、非 root）＋compose 測過。比較表 Jimmy 決定不做。注意：Ollama 現在由 compose 啟動（`docker compose up -d ollama`），原本手動的 `ollama` 容器已停止 |
+| 2026-10-27 | M7 | 完成（待 Jimmy 看過） | 作品頁四區塊＋參考資料（結果由 results.json 動態產生、熱圖、回答範例、已知限制、AI 使用說明表格與 AI 寫錯清單）；README 完成。手機 375px 檢查過 |
