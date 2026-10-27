@@ -1,0 +1,26 @@
+[project]
+name = "fiba-rules-faq"
+version = "0.1.0"
+description = "用 embedding 從自建題庫查詢 FIBA 2026 籃球規則"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.5.3",
+    "openai>=3.28.0",
+    "python-dotenv>=1.2.4",
+]
+
+[dependency-groups]
+dev = [
+    "matplotlib>=3.11.2",
+    "pytest>=9.1.1",
+    "ruff>=0.17.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
