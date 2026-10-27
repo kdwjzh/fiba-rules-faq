@@ -60,7 +60,7 @@
 - 設定 `LLM_MODEL=qwen3:0.6b` 後呼叫 `get_llm('openai')`，模型仍是 `gpt-6-luna`，確認 Lab 5 的 404 問題已修（沒有連網路）
 - 已知待辦：`PRICES` 沿用 Lab 5 價目表，沒有 `.env.example` 裡的 `gemini-3.8-flash`；M6 做 compare 前要依實際使用的雲端模型補上價格
 
-## M3 10 題跑通（2026-10-27，進行中）
+## M3 10 題跑通（2026-10-27）
 
 **工具**：Claude Code（Claude Opus 5.5）
 
@@ -80,3 +80,7 @@
 **驗證方式**
 - `uv run ruff check .`：All checks passed；`uv run pytest -q`：32 passed
 - 電腦上沒有 Docker／Ollama／WSL，`build_index` 與 `ask` 還沒用真的模型跑過；Jimmy 選擇自己安裝 Docker Desktop
+- Jimmy 裝好 Docker Desktop（WSL 2）後，用 Docker 啟動 Ollama，下載 `qwen3-embedding:0.6b`、`qwen3:1.7b`；`build_index` 10 題、維度 1024、約 7 秒
+- 第一次跑 12 條測試查詢：Hit@1 6/10、Hit@3 8/10；3 秒（「中鋒一直站在籃下」）和回場（「隊友跑回中線另一邊才接到」）連前 3 名都沒有。題庫外 2 條最高分 0.452，跟題庫內最低分 0.469 幾乎黏在一起，原本門檻 0.5 會誤拒 2 條答對的
+- 依 Qwen3-Embedding 的建議，查詢前面加英文任務說明（文件不加），並比較不加／英文／中文三種：英文最好，Hit@1 7/10、Hit@3 10/10，題庫外最高分降到 0.416、題庫內第 1 名最低 0.473，因此門檻改為 0.45
+- 沒有為了讓測試查詢命中去改題庫的別名，避免只是對答案；剩下 3 條 Hit@1 沒中的都被 travelling 搶第 1，M4 擴充題庫時再觀察
