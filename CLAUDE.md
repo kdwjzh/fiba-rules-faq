@@ -188,4 +188,4 @@ Claude Code 每完成一個里程碑，把以下內容追加到 `docs/ai-usage-l
 | 2026-10-26 | — | 交接說明建立 | 尚未建立 GitHub repo |
 | 2026-10-26 | M0 | 完成 | git init、remote 設好；`.gitignore`／`.gitattributes`／`.env.example`／`docs/ai-usage-log.md` 已 commit。repo 已確認 Public；第一次 push 實際未成功，M1 時一起 push |
 | 2026-10-26 | M1 | 完成 | `site/index.html` 四區塊空殼＋`pages.yml`（checkout@v7、configure-pages@v6、upload-pages-artifact@v5、deploy-pages@v5）。Deploy Pages 綠燈；作品頁 https://kdwjzh.github.io/fiba-rules-faq/ 可開啟 |
-| 2026-10-27 | M2 | 完成（CI 待確認） | 用 winget 裝 uv 0.13.6；`pyproject.toml`＋`uv.lock`、`faq/store.py`、`faq/llm.py`（修 Lab 5 雲端 fallback）、`tests/test_store.py`（9 passed）、`ci.yml`。`PRICES` 尚缺 `gemini-3.8-flash` |
+| 2026-10-27 | M2 | 完成 | 用 winget 裝 uv 0.13.6；`pyproject.toml`＋`uv.lock`、`faq/store.py`、`faq/llm.py`（修 Lab 5 雲端 fallback）、`tests/test_store.py`（9 passed）、`ci.yml` 綠燈。`PRICES` 尚缺 `gemini-3.8-flash` |
