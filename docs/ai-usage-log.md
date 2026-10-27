@@ -164,3 +164,28 @@
 **Jimmy 修改或否決了什麼**
 - 依我的試跑結果，請 Claude Code 補 travelling 的定義句、新增 offensive-foul、去掉回答開頭的 id，修正後重跑 3 題都答對
 - 對照 Art. 34.1.2，確認 throw-in-foul 原本漏了「最後 2 分鐘」條件；這題我之前審核時也沒發現
+
+## M6 結果與加分（2026-10-27）
+
+**工具**：Claude Code（Claude Opus 5.5）
+
+**Claude Code 做了什麼**
+- `faq/report.py`：跑 27 條測試查詢 → 算 Hit@1、Hit@3、題庫外拒答、題庫內誤拒 → 輸出 `site/data/results.json` 與 `site/similarity.png`（測試查詢 × 45 題的相似度熱圖，藍框標期望答案）；加 `--answers` 會另外跑 `answer.py`，統計模型回答被採用、出處正確、guard 擋下的數量
+- `tests/test_report.py`：用手寫的檢索結果測統計函式，不呼叫模型
+- `Dockerfile`（參考 Lab 4：multi-stage、相依分層快取、非 root 使用者 `app`）、`.dockerignore`、`compose.yaml`（Ollama ＋ 命令列 app，沿用課程的 `ollama` volume，`./data` 掛載回主機）
+- 修正：回答開頭「id」後面接換行時也會被拿掉
+- 本地 vs 雲端比較表：Jimmy 決定先不做（不想花錢，也避免金鑰外洩被扣 20 分）
+
+**結果**（本機 qwen3-embedding:0.6b ＋ qwen3:1.7b）
+- 檢索：Hit@1 17/24（71%）、Hit@3 22/24（92%）；門檻 0.50：題庫內誤拒 0、題庫外拒答 2/3
+- 模型回答：題庫內採用 19（出處正確 17）、guard 擋下 5、拒答 0；題庫外拒答 2/3；平均 14.1 秒
+- 已知問題：「排球一局打到幾分」檢索分數 0.561 過了門檻，模型也照答（第一輪 M5 時模型曾拒答，可見每輪會有差異）；「傳球傳太大力…」模型回答只有一個英文字「context」，guard 沒擋到（不是 id，長度也夠）
+
+**驗證方式**
+- `uv run ruff check .`：All checks passed；`uv run pytest -q`：119 passed
+- 看過熱圖：中文字型正常，大部分藍框是該列最紅的格子
+- `docker compose build app`：映像檔 327 MB，`id` 顯示 uid=999(app)；`docker compose run --rm app faq.build_index`、`faq.answer`、`faq.ask` 在容器內都正常，題庫外問題正確拒答
+- `grep -r "sk-|AIza|sk-ant" site/`：沒有金鑰
+
+**Jimmy 修改或否決了什麼**
+- （待填）
