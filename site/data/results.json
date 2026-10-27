@@ -1,0 +1,872 @@
+{
+  "generated_at": "2026-10-27T10:37:10+00:00",
+  "models": {
+    "embedding": "qwen3-embedding:0.6b",
+    "answer": "qwen3:1.7b"
+  },
+  "faq_count": 45,
+  "metrics": {
+    "題庫題數": 45,
+    "測試查詢": "27 條（題庫內 24、題庫外 3）",
+    "Hit@1": "17/24（71%）",
+    "Hit@3": "22/24（92%）",
+    "題庫外拒答": "2/3（67%）",
+    "題庫內誤拒": "0/24（0%）",
+    "拒答門檻": 0.5,
+    "模型回答（題庫內）": "採用 19（出處正確 17）、guard 擋下 5、拒答 0",
+    "模型回答（題庫外拒答）": "2/3（67%）",
+    "模型回答平均秒數": 14.1
+  },
+  "counts": {
+    "in_scope": 24,
+    "out_of_scope": 3,
+    "hit1": 17,
+    "hit3": 22,
+    "refused_out_of_scope": 2,
+    "false_refusal": 0,
+    "threshold": 0.5
+  },
+  "answer_counts": {
+    "adopted": 19,
+    "correct_source": 17,
+    "guard_blocked": 5,
+    "refused_in_scope": 0,
+    "refused_out_of_scope": 2,
+    "avg_seconds": 14.1
+  },
+  "queries": [
+    {
+      "query": "拿球跑三步會被吹嗎",
+      "expected": [
+        "travelling"
+      ],
+      "top": [
+        [
+          "travelling",
+          0.683
+        ],
+        [
+          "three-seconds",
+          0.605
+        ],
+        [
+          "kicking-ball",
+          0.59
+        ]
+      ]
+    },
+    {
+      "query": "球抱起來之後又拍了幾下",
+      "expected": [
+        "double-dribble"
+      ],
+      "top": [
+        [
+          "travelling",
+          0.601
+        ],
+        [
+          "double-dribble",
+          0.592
+        ],
+        [
+          "shot-clock",
+          0.578
+        ]
+      ]
+    },
+    {
+      "query": "中鋒一直站在籃下等球可以嗎",
+      "expected": [
+        "three-seconds"
+      ],
+      "top": [
+        [
+          "goaltending",
+          0.594
+        ],
+        [
+          "travelling",
+          0.572
+        ],
+        [
+          "last-two-minutes-throw-in",
+          0.56
+        ]
+      ]
+    },
+    {
+      "query": "被包夾在自己半場一直帶不過去",
+      "expected": [
+        "eight-seconds"
+      ],
+      "top": [
+        [
+          "eight-seconds",
+          0.577
+        ],
+        [
+          "no-charge-semicircle",
+          0.567
+        ],
+        [
+          "backcourt",
+          0.554
+        ]
+      ]
+    },
+    {
+      "query": "計時器響的時候球還在空中算不算",
+      "expected": [
+        "shot-clock"
+      ],
+      "top": [
+        [
+          "shot-clock",
+          0.665
+        ],
+        [
+          "shot-clock-reset-rebound",
+          0.613
+        ],
+        [
+          "three-seconds",
+          0.579
+        ]
+      ]
+    },
+    {
+      "query": "傳球傳太大力隊友跑回中線另一邊才接到",
+      "expected": [
+        "backcourt"
+      ],
+      "top": [
+        [
+          "travelling",
+          0.587
+        ],
+        [
+          "backcourt",
+          0.562
+        ],
+        [
+          "kicking-ball",
+          0.556
+        ]
+      ]
+    },
+    {
+      "query": "球已經往下掉了被拍掉會給分嗎",
+      "expected": [
+        "goaltending"
+      ],
+      "top": [
+        [
+          "goaltending",
+          0.636
+        ],
+        [
+          "own-basket",
+          0.613
+        ],
+        [
+          "basket-interference",
+          0.604
+        ]
+      ]
+    },
+    {
+      "query": "犯規太多會被趕出場嗎",
+      "expected": [
+        "foul-limit"
+      ],
+      "top": [
+        [
+          "foul-limit",
+          0.763
+        ],
+        [
+          "team-fouls",
+          0.677
+        ],
+        [
+          "disqualifying-foul",
+          0.654
+        ]
+      ]
+    },
+    {
+      "query": "快攻的時候故意從後面拉人會怎麼判",
+      "expected": [
+        "disruptive-foul"
+      ],
+      "top": [
+        [
+          "offensive-foul",
+          0.513
+        ],
+        [
+          "disruptive-foul",
+          0.473
+        ],
+        [
+          "shot-clock",
+          0.471
+        ]
+      ]
+    },
+    {
+      "query": "這節犯規很多次了對方是不是直接罰球",
+      "expected": [
+        "team-fouls"
+      ],
+      "top": [
+        [
+          "team-fouls",
+          0.768
+        ],
+        [
+          "shooting-foul",
+          0.729
+        ],
+        [
+          "throw-in-foul",
+          0.687
+        ]
+      ]
+    },
+    {
+      "query": "四節打完還同分要再打多久",
+      "expected": [
+        "overtime"
+      ],
+      "top": [
+        [
+          "overtime",
+          0.728
+        ],
+        [
+          "game-duration",
+          0.617
+        ],
+        [
+          "timeouts",
+          0.586
+        ]
+      ]
+    },
+    {
+      "query": "球被撥到自己家籃框裡算誰的分",
+      "expected": [
+        "own-basket"
+      ],
+      "top": [
+        [
+          "own-basket",
+          0.761
+        ],
+        [
+          "basket-interference",
+          0.677
+        ],
+        [
+          "goaltending",
+          0.622
+        ]
+      ]
+    },
+    {
+      "query": "切入的時候在禁區底下被撞倒算誰犯規",
+      "expected": [
+        "no-charge-semicircle",
+        "charging-blocking"
+      ],
+      "top": [
+        [
+          "charging-blocking",
+          0.658
+        ],
+        [
+          "offensive-foul",
+          0.639
+        ],
+        [
+          "throw-in-foul",
+          0.608
+        ]
+      ]
+    },
+    {
+      "query": "球員故意倒地騙犯規會被處罰嗎",
+      "expected": [
+        "fake-foul"
+      ],
+      "top": [
+        [
+          "fake-foul",
+          0.66
+        ],
+        [
+          "kicking-ball",
+          0.636
+        ],
+        [
+          "goaltending",
+          0.613
+        ]
+      ]
+    },
+    {
+      "query": "對手站在一公尺內貼著我，我要多快出手",
+      "expected": [
+        "closely-guarded"
+      ],
+      "top": [
+        [
+          "shot-clock",
+          0.653
+        ],
+        [
+          "closely-guarded",
+          0.641
+        ],
+        [
+          "eight-seconds",
+          0.593
+        ]
+      ]
+    },
+    {
+      "query": "裁判可以回放影片改判嗎",
+      "expected": [
+        "instant-replay"
+      ],
+      "top": [
+        [
+          "instant-replay",
+          0.715
+        ],
+        [
+          "backcourt",
+          0.524
+        ],
+        [
+          "technical-foul-penalty",
+          0.508
+        ]
+      ]
+    },
+    {
+      "query": "灌籃之後一直掛在籃框上會怎樣",
+      "expected": [
+        "technical-foul-categories"
+      ],
+      "top": [
+        [
+          "basket-interference",
+          0.677
+        ],
+        [
+          "own-basket",
+          0.641
+        ],
+        [
+          "goaltending",
+          0.594
+        ]
+      ]
+    },
+    {
+      "query": "上籃進了又被打手，可以多罰嗎",
+      "expected": [
+        "shooting-foul"
+      ],
+      "top": [
+        [
+          "shooting-foul",
+          0.697
+        ],
+        [
+          "team-fouls",
+          0.605
+        ],
+        [
+          "shot-clock-reset-rebound",
+          0.6
+        ]
+      ]
+    },
+    {
+      "query": "比賽剩一分多鐘喊暫停能不能直接在對面半場開球",
+      "expected": [
+        "last-two-minutes-throw-in"
+      ],
+      "top": [
+        [
+          "timeouts",
+          0.757
+        ],
+        [
+          "last-two-minutes-throw-in",
+          0.727
+        ],
+        [
+          "eight-seconds",
+          0.616
+        ]
+      ]
+    },
+    {
+      "query": "球沒進但打到框，我們自己搶回來了，秒數怎麼算",
+      "expected": [
+        "shot-clock-reset-rebound"
+      ],
+      "top": [
+        [
+          "shot-clock-reset-rebound",
+          0.775
+        ],
+        [
+          "own-basket",
+          0.663
+        ],
+        [
+          "shot-clock",
+          0.661
+        ]
+      ]
+    },
+    {
+      "query": "教練一直罵裁判會被請出去嗎",
+      "expected": [
+        "head-coach-disqualification"
+      ],
+      "top": [
+        [
+          "head-coach-disqualification",
+          0.695
+        ],
+        [
+          "free-throw-shooter",
+          0.584
+        ],
+        [
+          "fighting",
+          0.581
+        ]
+      ]
+    },
+    {
+      "query": "打球的時候不小心球碰到腳",
+      "expected": [
+        "kicking-ball"
+      ],
+      "top": [
+        [
+          "kicking-ball",
+          0.77
+        ],
+        [
+          "basket-interference",
+          0.684
+        ],
+        [
+          "goaltending",
+          0.623
+        ]
+      ]
+    },
+    {
+      "query": "請告訴我什麼是走步",
+      "expected": [
+        "travelling"
+      ],
+      "top": [
+        [
+          "travelling",
+          0.858
+        ],
+        [
+          "kicking-ball",
+          0.534
+        ],
+        [
+          "act-of-shooting",
+          0.506
+        ]
+      ]
+    },
+    {
+      "query": "請告訴我什麼是進攻犯規",
+      "expected": [
+        "offensive-foul"
+      ],
+      "top": [
+        [
+          "offensive-foul",
+          0.9
+        ],
+        [
+          "shooting-foul",
+          0.661
+        ],
+        [
+          "team-fouls",
+          0.651
+        ]
+      ]
+    },
+    {
+      "query": "NBA 球員的薪水上限是多少",
+      "expected": [],
+      "top": [
+        [
+          "team-size",
+          0.41
+        ],
+        [
+          "three-seconds",
+          0.359
+        ],
+        [
+          "free-throw-rules",
+          0.341
+        ]
+      ]
+    },
+    {
+      "query": "籃球鞋要怎麼挑比較不會扭到",
+      "expected": [],
+      "top": [
+        [
+          "kicking-ball",
+          0.491
+        ],
+        [
+          "basket-interference",
+          0.428
+        ],
+        [
+          "travelling",
+          0.41
+        ]
+      ]
+    },
+    {
+      "query": "排球一局打到幾分",
+      "expected": [],
+      "top": [
+        [
+          "goal-value",
+          0.561
+        ],
+        [
+          "overtime",
+          0.464
+        ],
+        [
+          "shooting-foul",
+          0.455
+        ]
+      ]
+    }
+  ],
+  "answers": [
+    {
+      "query": "拿球跑三步會被吹嗎",
+      "expected": [
+        "travelling"
+      ],
+      "seconds": 14.2,
+      "answer": "拿球跑三步可能觸發走步違例，需判罰。",
+      "source_ids": [
+        "travelling"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "球抱起來之後又拍了幾下",
+      "expected": [
+        "double-dribble"
+      ],
+      "seconds": 17.2,
+      "answer": "雙運球（double-dribble）違例，運球時雙手同時碰球即結束，後續不能再開始運球。例外是球已離手，如投籃或傳球後拿回球可重新運球。",
+      "source_ids": [
+        "double-dribble"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "中鋒一直站在籃下等球可以嗎",
+      "expected": [
+        "three-seconds"
+      ],
+      "seconds": 23.2,
+      "answer": "中鋒站在籃下等球屬合法防守站位，不涉及走步或干扰球違例。",
+      "source_ids": [
+        "goaltending",
+        "travelling"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "被包夾在自己半場一直帶不過去",
+      "expected": [
+        "eight-seconds"
+      ],
+      "seconds": 17.5,
+      "answer": "八秒規則（eight-seconds）：被包夾在自己半場無法帶球出去，若未在八秒內帶入前場，即為違例。",
+      "source_ids": [
+        "eight-seconds"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "計時器響的時候球還在空中算不算",
+      "expected": [
+        "shot-clock"
+      ],
+      "seconds": 13.5,
+      "answer": "計時器響時球還在空中算進球，但需碰框才能繼續比賽，未碰框即為違例。",
+      "source_ids": [
+        "shot-clock"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "傳球傳太大力隊友跑回中線另一邊才接到",
+      "expected": [
+        "backcourt"
+      ],
+      "seconds": 17.9,
+      "answer": "context",
+      "source_ids": [
+        "travelling"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "球已經往下掉了被拍掉會給分嗎",
+      "expected": [
+        "goaltending"
+      ],
+      "seconds": 15.9,
+      "guard": "回答 137 字，超過 100 字"
+    },
+    {
+      "query": "犯規太多會被趕出場嗎",
+      "expected": [
+        "foul-limit"
+      ],
+      "seconds": 16.8,
+      "answer": "球員累積 5 次犯規會被驅逐，若達 2 次第 1 類技術犯規或 2 次 flagrant foul 也會被取消比賽資格。",
+      "source_ids": [
+        "foul-limit"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "快攻的時候故意從後面拉人會怎麼判",
+      "expected": [
+        "disruptive-foul"
+      ],
+      "seconds": 19.2,
+      "guard": "回答 237 字，超過 100 字"
+    },
+    {
+      "query": "這節犯規很多次了對方是不是直接罰球",
+      "expected": [
+        "team-fouls"
+      ],
+      "seconds": 20.3,
+      "answer": "每節全隊犯規累積滿 4 次後進入團隊犯規罰則，防守方對沒有在投籃的球員犯一般犯規，改成罰 2 球，不再只是發界外球。",
+      "source_ids": [
+        "team-fouls"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "四節打完還同分要再打多久",
+      "expected": [
+        "overtime"
+      ],
+      "seconds": 11.7,
+      "answer": "Overtime 每次 5 分鐘，打到分出勝負為止。",
+      "source_ids": [
+        "overtime"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "球被撥到自己家籃框裡算誰的分",
+      "expected": [
+        "own-basket"
+      ],
+      "seconds": 11.3,
+      "answer": "球被撥到自己家籃框裡屬意外，對方得2分。",
+      "source_ids": [
+        "own-basket"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "切入的時候在禁區底下被撞倒算誰犯規",
+      "expected": [
+        "no-charge-semicircle",
+        "charging-blocking"
+      ],
+      "seconds": 16.4,
+      "answer": "撞人（charging）是推或撞進對手的軀幹，常見於進攻球員往前衝撞已經站好位置的防守者。若在禁區底下被撞，屬撞人犯规，由犯規方罰球。",
+      "source_ids": [
+        "charging-blocking"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "球員故意倒地騙犯規會被處罰嗎",
+      "expected": [
+        "fake-foul"
+      ],
+      "seconds": 11.8,
+      "answer": "假摔會被判犯規，屬於第1類技術犯規，累計取消比賽資格。",
+      "source_ids": [
+        "fake-foul"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "對手站在一公尺內貼著我，我要多快出手",
+      "expected": [
+        "closely-guarded"
+      ],
+      "seconds": 10.6,
+      "answer": "對手站在一公尺內貼著我，需在5秒內傳球、投籃或開始運球。否則違例。",
+      "source_ids": [
+        "closely-guarded"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "裁判可以回放影片改判嗎",
+      "expected": [
+        "instant-replay"
+      ],
+      "seconds": 10.8,
+      "answer": "裁判在有重播系統時可看進球判決、犯規等級，並改判。2026版新增：最後2分鐘可看發球員球出手。",
+      "source_ids": [
+        "instant-replay"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "灌籃之後一直掛在籃框上會怎樣",
+      "expected": [
+        "technical-foul-categories"
+      ],
+      "seconds": 13.3,
+      "guard": "回答只有 id，沒有內容"
+    },
+    {
+      "query": "上籃進了又被打手，可以多罰嗎",
+      "expected": [
+        "shooting-foul"
+      ],
+      "seconds": 16.5,
+      "guard": "回答只有 id，沒有內容"
+    },
+    {
+      "query": "比賽剩一分多鐘喊暫停能不能直接在對面半場開球",
+      "expected": [
+        "last-two-minutes-throw-in"
+      ],
+      "seconds": 13.0,
+      "guard": "回答只有 id，沒有內容"
+    },
+    {
+      "query": "球沒進但打到框，我們自己搶回來了，秒數怎麼算",
+      "expected": [
+        "shot-clock-reset-rebound"
+      ],
+      "seconds": 15.3,
+      "answer": "球未進但打到框後，若由自己搶回，進攻時間重設為14秒。",
+      "source_ids": [
+        "shot-clock-reset-rebound"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "教練一直罵裁判會被請出去嗎",
+      "expected": [
+        "head-coach-disqualification"
+      ],
+      "seconds": 20.8,
+      "answer": "頭 coach 被吹技術犯規 2 次即離場，若罵裁判屬違規，可能影響其比賽資格。但FAQ中無明確規則，需依實際判決。",
+      "source_ids": [
+        "head-coach-disqualification"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "打球的時候不小心球碰到腳",
+      "expected": [
+        "kicking-ball"
+      ],
+      "seconds": 15.4,
+      "answer": "不違例，若只是不小心讓球碰到腳或腿，不算違例。",
+      "source_ids": [
+        "kicking-ball"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "請告訴我什麼是走步",
+      "expected": [
+        "travelling"
+      ],
+      "seconds": 12.9,
+      "answer": "走步是指持球時腳的移動超出規則允許範圍，兩腳站著接球時一隻腳為中樞腳，第二步落地前必須運球。",
+      "source_ids": [
+        "travelling"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "請告訴我什麼是進攻犯規",
+      "expected": [
+        "offensive-foul"
+      ],
+      "seconds": 14.2,
+      "answer": "進攻犯規是控球方球員在進攻時造成的個人犯規，如帶球撞防守者或掩護時移動撞到對手。犯規不罰球，對方在最近地點發界外球。",
+      "source_ids": [
+        "offensive-foul"
+      ],
+      "confidence": "高"
+    },
+    {
+      "query": "NBA 球員的薪水上限是多少",
+      "expected": [],
+      "seconds": 0.1,
+      "answer": "題庫沒有相關規則",
+      "source_ids": [],
+      "confidence": "低"
+    },
+    {
+      "query": "籃球鞋要怎麼挑比較不會扭到",
+      "expected": [],
+      "seconds": 0.1,
+      "answer": "題庫沒有相關規則",
+      "source_ids": [],
+      "confidence": "低"
+    },
+    {
+      "query": "排球一局打到幾分",
+      "expected": [],
+      "seconds": 11.2,
+      "answer": "排球一局得分通常為1分，與篮球不同。若按篮球规则，得分方式為2分（两分区）或3分（三分区），但排球得分為1分。最相關條目為goal-value（FIBA OBR 2026 Art. 16）",
+      "source_ids": [
+        "goal-value"
+      ],
+      "confidence": "高"
+    }
+  ]
+}
