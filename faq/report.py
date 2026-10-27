@@ -147,7 +147,7 @@ def main() -> None:
         })
     (SITE / "data").mkdir(parents=True, exist_ok=True)
     out = SITE / "data" / "results.json"
-    out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     heatmap(sim, queries, ids, SITE / "similarity.png")
     for k, v in result["metrics"].items():
         print(f"{k}：{v}")
