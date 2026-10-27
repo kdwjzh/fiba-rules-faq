@@ -75,7 +75,7 @@
 - Art. 25 走步、26 三秒、28 八秒、29 進攻計時與 2024 版相同
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- Claude Code 找不到 Docker 和 Ollama，我選擇自己安裝 Docker Desktop，沒有改用 Windows 版 Ollama，照原本的課程環境做，M6 的 Dockerfile 也需要 Docker
 
 **驗證方式**
 - `uv run ruff check .`：All checks passed；`uv run pytest -q`：32 passed
