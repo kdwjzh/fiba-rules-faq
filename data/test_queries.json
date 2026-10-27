@@ -1,0 +1,14 @@
+[
+  {"query": "拿球跑三步會被吹嗎", "expected": ["travelling"]},
+  {"query": "球抱起來之後又拍了幾下", "expected": ["double-dribble"]},
+  {"query": "中鋒一直站在籃下等球可以嗎", "expected": ["three-seconds"]},
+  {"query": "被包夾在自己半場一直帶不過去", "expected": ["eight-seconds"]},
+  {"query": "計時器響的時候球還在空中算不算", "expected": ["shot-clock"]},
+  {"query": "傳球傳太大力隊友跑回中線另一邊才接到", "expected": ["backcourt"]},
+  {"query": "球已經往下掉了被拍掉會給分嗎", "expected": ["goaltending"]},
+  {"query": "犯規太多會被趕出場嗎", "expected": ["foul-limit"]},
+  {"query": "快攻的時候故意從後面拉人會怎麼判", "expected": ["disruptive-foul"]},
+  {"query": "這節犯規很多次了對方是不是直接罰球", "expected": ["team-fouls"]},
+  {"query": "NBA 球員的薪水上限是多少", "expected": []},
+  {"query": "籃球鞋要怎麼挑比較不會扭到", "expected": []}
+]
