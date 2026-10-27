@@ -7,7 +7,7 @@
     "example": "運球結束抓球後踩了三步才上籃，就是走步。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 25",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "double-dribble",
@@ -349,7 +349,7 @@
     "answer": "只有第四節和延長賽最後 2 分鐘內，球已交給發球員準備發界外球時，防守方對場上的對手犯規，才算 throw-in foul：不管防守方是否已進入團隊犯規罰則，被犯規的球員都只罰 1 球，之後由原本的球隊在最近的地點繼續發球。其他時間發球時的犯規，照一般個人犯規處理。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 34",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "technical-foul-penalty",
@@ -412,6 +412,6 @@
     "answer": "進攻犯規是控球的一方（進攻方）球員造成的個人犯規，常見的是帶球撞進已經站好位置的防守者，或做掩護時還在移動而撞到對手。犯規照樣記在犯規者身上、也算團隊犯規，但不罰球，改由對方在最近的地點發界外球；即使控球方已進入團隊犯規罰則也一樣。",
     "category": "犯規",
     "source": "FIBA OBR 2026 Art. 33、Art. 42",
-    "status": "draft"
+    "status": "verified"
   }
 ]
