@@ -23,7 +23,8 @@ def test_required_fields(item):
 @pytest.mark.parametrize("item", ITEMS, ids=IDS)
 def test_values(item):
     assert item["category"] in CATEGORIES
-    assert item["source"].startswith("FIBA OBR 2026 Art.")
+    # 重播（IRS）規定在附錄，沒有條號
+    assert item["source"].startswith(("FIBA OBR 2026 Art.", "FIBA OBR 2026 Appendix "))
     assert item["status"] in {"draft", "verified"}
 
 
