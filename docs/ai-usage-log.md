@@ -136,6 +136,8 @@
 
 **Jimmy 修改或否決了什麼**
 - 同意 Claude Code 把拒答改由檢索門檻決定、保留思考模式（較慢但較準）的做法
+- 自己用 faq.answer 測了 3 題：「拿球跑三步會被吹嗎」回答正確；「什麼是走步」只回答步數規則，沒有解釋名詞；「什麼是進攻犯規」完全答錯，引用了 team-fouls，回答開頭還帶著 id。我把這些情況回報給 Claude Code 分析
+- 也注意到這是兩種不同的問法：情境題（某個情況會不會違例）和名詞解釋題（某個規則是什麼），後者需要題庫答案裡有定義句
 
 **驗證方式**
 - `uv run ruff check .`：All checks passed；`uv run pytest -q`：112 passed
@@ -160,4 +162,5 @@
 - 副作用：「快攻的時候故意從後面拉人」的第 1 名從 disruptive-foul 變成 offensive-foul（0.513 vs 0.473），Hit@1 少 1 條
 
 **Jimmy 修改或否決了什麼**
-- （待填）
+- 依我的試跑結果，請 Claude Code 補 travelling 的定義句、新增 offensive-foul、去掉回答開頭的 id，修正後重跑 3 題都答對
+- 對照 Art. 34.1.2，確認 throw-in-foul 原本漏了「最後 2 分鐘」條件；這題我之前審核時也沒發現
