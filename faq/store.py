@@ -16,6 +16,12 @@ def load_faq(path: Path = FAQ_PATH) -> list[dict]:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
+def load_index(path: Path = INDEX_PATH) -> tuple[np.ndarray, list[str], str]:
+    """讀 build_index 存的 vectors、ids 與題庫 hash。"""
+    with np.load(path) as z:
+        return z["vectors"], [str(i) for i in z["ids"]], str(z["faq_hash"])
+
+
 def doc_text(item: dict) -> str:
     """算 embedding 用的文字：question + aliases + answer。"""
     return "\n".join([item["question"], "、".join(item.get("aliases", [])), item["answer"]])
