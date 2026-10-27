@@ -1,0 +1,30 @@
+# 用法（先停掉手動啟動的 ollama 容器，避免 11434 埠衝突：docker stop ollama）
+#   docker compose up -d ollama
+#   docker compose run --rm app faq.build_index
+#   docker compose run --rm app faq.answer "拿球走三步會怎樣"
+name: fiba-rules-faq
+
+services:
+  ollama:         # AI 服務：沿用課程的 ollama volume，模型不用重新下載
+    image: ollama/ollama:latest
+    ports: ["127.0.0.1:11434:11434"]   # 只開給本機，主機上的 uv run 也能用
+    volumes: ["ollama:/root/.ollama"]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:            # 命令列工具：用 run 執行，不常駐
+    build: .
+    image: fiba-rules-faq:0.1.0
+    environment:
+      LOCAL_BASE_URL: http://ollama:11434/v1
+    volumes: ["./data:/app/data"]      # index.npz 寫回主機，容器刪掉也還在
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+volumes:
+  ollama:
+    external: true
