@@ -7,7 +7,7 @@
     "example": "運球結束抓球後踩了三步才上籃，就是走步。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 25",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "double-dribble",
@@ -17,7 +17,7 @@
     "example": "運球後雙手抱球，猶豫一下又開始運，屬於二次運球。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 24",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "three-seconds",
@@ -27,7 +27,7 @@
     "example": "中鋒在禁區卡位等球，連續站了 4 秒都沒出來，就是 3 秒違例。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 26",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "eight-seconds",
@@ -37,7 +37,7 @@
     "example": "對方全場緊迫盯人，後衛在後場運了 9 秒還沒過中線，就是 8 秒違例。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 28",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "shot-clock",
@@ -47,7 +47,7 @@
     "example": "投籃時 24 秒響了，球在空中，最後打到籃框彈出，不算違例。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 29",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "backcourt",
@@ -57,7 +57,7 @@
     "example": "前場傳球太大力，隊友跑回後場才接到，就是回場違例。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 30",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "goaltending",
@@ -67,7 +67,7 @@
     "example": "對手三分球已經往下掉，中鋒在籃框上方把球拍掉，直接給對方 3 分。",
     "category": "違例",
     "source": "FIBA OBR 2026 Art. 31",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "foul-limit",
@@ -77,7 +77,7 @@
     "example": "第三節球員吹到第 5 次犯規，要馬上換人下場。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 41",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "team-fouls",
@@ -87,7 +87,7 @@
     "example": "第二節已經 4 次團隊犯規，第 5 次在防守時拉人，對方直接罰 2 球。",
     "category": "罰則",
     "source": "FIBA OBR 2026 Art. 42",
-    "status": "draft"
+    "status": "verified"
   },
   {
     "id": "disruptive-foul",
@@ -97,6 +97,6 @@
     "example": "對方抄球後快攻，防守者沒有要抄球、只是從旁邊拉住他阻止推進，就是 disruptive foul。",
     "category": "2026 新制",
     "source": "FIBA OBR 2026 Art. 37",
-    "status": "draft"
+    "status": "verified"
   }
 ]
