@@ -39,3 +39,23 @@
 - 發現 M0 的 push 其實沒有成功（GitHub API 顯示 repo 沒有任何分支），M1 時一併重新 push
 - 第一次部署失敗：`configure-pages` 回報 `Get Pages site failed ... Not Found`。原因是 repo 還是空的時候就去 Settings → Pages 選 GitHub Actions，設定沒有存下來（GitHub API 顯示 `has_pages: false`）
 - Jimmy 用 kdwjzh 帳號重新設定 Source、手動 Run workflow 後，Deploy Pages 綠燈；`curl` 確認 https://kdwjzh.github.io/fiba-rules-faq/ 回傳 200，頁面有五個區塊標題
+
+## M2 骨架＋CI（2026-10-27）
+
+**工具**：Claude Code（Claude Opus 5.5）
+
+**Claude Code 做了什麼**
+- 發現電腦上沒有 uv（交接說明寫有裝），經 Jimmy 同意後用 `winget install --id astral-sh.uv -e` 安裝 uv 0.13.6
+- `pyproject.toml`、`.python-version`（3.12）、`uv.lock`：一般相依 `openai`、`python-dotenv`、`numpy`；dev 相依 `pytest`、`ruff`、`matplotlib`；ruff 規則沿用課程 Lab 5
+- `faq/store.py`：純函式 `load_faq`、`doc_text`、`faq_hash`、`normalize`、`cosine`、`top_k`、`is_answerable`，門檻 `THRESHOLD = 0.5`
+- `faq/llm.py`：改自 Lab 5 `agent/llm.py`。修正雲端 profile 會 fallback 到 `LLM_MODEL` 的問題（只有 local 讀 `LOCAL_MODEL`／`LLM_MODEL`）；新增 `EMBED_MODEL`；未知的 profile 直接報錯，不再默默改用 local
+- `tests/test_store.py`：9 個測試，用手做的 3 維向量測正規化、cosine、top-k 排序、門檻拒答、題庫 hash
+- `.github/workflows/ci.yml`：`checkout@v7` → `astral-sh/setup-uv@v7`（Python 3.12）→ `uv sync --locked --dev` → ruff → pytest
+
+**Jimmy 修改或否決了什麼**
+- （待填）
+
+**驗證方式**
+- 本機 `uv run ruff check .`：All checks passed；`uv run pytest -q`：9 passed
+- 設定 `LLM_MODEL=qwen3:0.6b` 後呼叫 `get_llm('openai')`，模型仍是 `gpt-6-luna`，確認 Lab 5 的 404 問題已修（沒有連網路）
+- 已知待辦：`PRICES` 沿用 Lab 5 價目表，沒有 `.env.example` 裡的 `gemini-3.8-flash`；M6 做 compare 前要依實際使用的雲端模型補上價格
