@@ -9,6 +9,19 @@
   {"query": "犯規太多會被趕出場嗎", "expected": ["foul-limit"]},
   {"query": "快攻的時候故意從後面拉人會怎麼判", "expected": ["disruptive-foul"]},
   {"query": "這節犯規很多次了對方是不是直接罰球", "expected": ["team-fouls"]},
+  {"query": "四節打完還同分要再打多久", "expected": ["overtime"]},
+  {"query": "球被撥到自己家籃框裡算誰的分", "expected": ["own-basket"]},
+  {"query": "切入的時候在禁區底下被撞倒算誰犯規", "expected": ["no-charge-semicircle", "charging-blocking"]},
+  {"query": "球員故意倒地騙犯規會被處罰嗎", "expected": ["fake-foul"]},
+  {"query": "對手站在一公尺內貼著我，我要多快出手", "expected": ["closely-guarded"]},
+  {"query": "裁判可以回放影片改判嗎", "expected": ["instant-replay"]},
+  {"query": "灌籃之後一直掛在籃框上會怎樣", "expected": ["technical-foul-categories"]},
+  {"query": "上籃進了又被打手，可以多罰嗎", "expected": ["shooting-foul"]},
+  {"query": "比賽剩一分多鐘喊暫停能不能直接在對面半場開球", "expected": ["last-two-minutes-throw-in"]},
+  {"query": "球沒進但打到框，我們自己搶回來了，秒數怎麼算", "expected": ["shot-clock-reset-rebound"]},
+  {"query": "教練一直罵裁判會被請出去嗎", "expected": ["head-coach-disqualification"]},
+  {"query": "打球的時候不小心球碰到腳", "expected": ["kicking-ball"]},
   {"query": "NBA 球員的薪水上限是多少", "expected": []},
-  {"query": "籃球鞋要怎麼挑比較不會扭到", "expected": []}
+  {"query": "籃球鞋要怎麼挑比較不會扭到", "expected": []},
+  {"query": "排球一局打到幾分", "expected": []}
 ]
