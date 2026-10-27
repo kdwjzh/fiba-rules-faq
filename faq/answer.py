@@ -30,12 +30,22 @@ class GuardError(ValueError):
     """模型輸出不符合規定（例如引用了 top-3 以外的 id）。"""
 
 
+def strip_id_prefix(text: str, ids: list[str]) -> str:
+    """拿掉開頭的「team-fouls：」這類 id 前綴（Jimmy 試跑時發現）。"""
+    for i in ids:
+        m = re.match(rf"\s*{re.escape(i)}\s*(?:（[^）]*）)?\s*[:：]\s*", text, flags=re.IGNORECASE)
+        if m:
+            return text[m.end():]
+    return text
+
+
 def guard(ans: RuleAnswer, allowed_ids: list[str]) -> RuleAnswer:
     """程式端檢查：source_ids 必須是 top-3 的子集；回答了就要附出處；不可超過 100 字。不呼叫模型。
     信心「低」時改成拒答。"""
     extra = [i for i in ans.source_ids if i not in allowed_ids]
     if extra:
         raise GuardError(f"引用了不在 top-3 的 id：{extra}")
+    ans = ans.model_copy(update={"answer": strip_id_prefix(ans.answer, allowed_ids)})
     if ans.answer.strip() == REFUSAL or ans.confidence == "低":
         return RuleAnswer(answer=REFUSAL, source_ids=[], confidence="低")
     if not ans.source_ids:

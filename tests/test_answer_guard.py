@@ -8,7 +8,7 @@ TOP3 = ["travelling", "double-dribble", "three-seconds"]
 
 def test_sources_within_top3_pass():
     ans = RuleAnswer(answer="走三步是走步違例。", source_ids=["travelling"], confidence="高")
-    assert guard(ans, TOP3) is ans
+    assert guard(ans, TOP3) == ans
 
 
 def test_source_outside_top3_blocked():
@@ -38,6 +38,13 @@ def test_answer_that_is_only_an_id_blocked():
     ans = RuleAnswer(answer="foul-limit", source_ids=["foul-limit"], confidence="高")
     with pytest.raises(GuardError, match="id"):
         guard(ans, ["foul-limit", "team-fouls", "disruptive-foul"])
+
+
+def test_id_prefix_stripped():
+    ans = RuleAnswer(answer="team-fouls：進攻方犯規仍由對方發球。", source_ids=["team-fouls"], confidence="高")
+    assert guard(ans, ["team-fouls", "shot-clock", "travelling"]).answer == "進攻方犯規仍由對方發球。"
+    ans2 = RuleAnswer(answer="Overtime（FIBA OBR 2026 Art. 8）：延長賽每次 5 分鐘。", source_ids=["overtime"], confidence="高")
+    assert guard(ans2, ["overtime"]).answer == "延長賽每次 5 分鐘。"
 
 
 def test_answer_mentioning_id_with_content_passes():
