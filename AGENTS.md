@@ -10,13 +10,15 @@
   - `build_index.py`：把題庫轉成 embedding，存到 `data/index.npz`
   - `ask.py`：命令列查詢
   - `answer.py`：加強版：根據 top-3 用結構化輸出產生回答
-  - `report.py`：跑測試查詢，輸出作品頁要用的結果
-  - `compare.py`：本地 vs 雲端比較表
+  - `report.py`：跑測試查詢，輸出作品頁要用的結果（`--answers` 另跑結構化回答）
+  - 本地 vs 雲端比較表（`compare.py`）沒有做：Jimmy 決定不做
 - `data/faq.json`：題庫（人寫的內容，見下方規則）
 - `data/test_queries.json`：測試查詢與期望答案 id
 - `tests/`：pytest（不呼叫模型）
 - `site/`：GitHub Pages 作品頁（靜態檔）
+- `docs/ai-usage-log.md`：每個里程碑的 AI 使用紀錄
 - `.github/workflows/`：`pages.yml`（部署作品頁）、`ci.yml`（ruff + pytest）
+- `Dockerfile`、`compose.yaml`：容器版（Ollama ＋ 命令列 app，非 root）
 
 ## 開發環境
 - Python 3.12，一律用 uv，不要用 pip：`uv sync`
